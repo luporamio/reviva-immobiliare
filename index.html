@@ -13,6 +13,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Google Maps Places API: sostituire GOOGLE_MAPS_API_KEY con la chiave reale (limitata al dominio) -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAPS_API_KEY&libraries=places&callback=initMapsAutocomplete">
+    </script>
 
     <script>
         tailwind.config = {
@@ -785,8 +789,11 @@
                 <div class="form-step" data-step="4" style="display:none;">
                     <div class="space-y-5">
                         <div>
-                            <label class="fl">Indirizzo o zona *</label>
-                            <input class="fi" type="text" name="indirizzo" placeholder="es. Via Roma 14, Ferrara">
+                            <label class="fl">Indirizzo *</label>
+                            <input class="fi" type="text" name="indirizzo"
+                                   id="indirizzo-autocomplete"
+                                   placeholder="es. Via Roma 14, Ferrara"
+                                   autocomplete="off">
                         </div>
                         <div>
                             <label class="fl" style="margin-bottom:0.75rem;">Superficie</label>
@@ -809,14 +816,16 @@
                             <input type="hidden" name="stato" id="stato-val">
                         </div>
                         <div>
-                            <label class="fl" style="margin-bottom:0.75rem;">Prezzo richiesto</label>
-                            <div class="grid grid-cols-2 gap-2" data-group="prezzo">
-                                <div class="rpill" data-value="sotto_30"><span>Sotto 30K</span></div>
-                                <div class="rpill" data-value="30_50"><span>30 – 50K</span></div>
-                                <div class="rpill" data-value="50_70"><span>50 – 70K</span></div>
-                                <div class="rpill" data-value="oltre_70"><span>Oltre 70K</span></div>
+                            <label class="fl">Prezzo richiesto (€)</label>
+                            <input class="fi" type="text" name="prezzo_libero" id="prezzo-input"
+                                   placeholder="es. 55.000" inputmode="numeric">
+                            <div class="mt-3 stima-toggle" id="stima-toggle">
+                                <div class="stima-box" id="stima-box">
+                                    <svg id="stima-check-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </div>
+                                <span class="text-sm" style="color: rgba(250,248,244,0.60);">Non conosco il valore. Ho bisogno di una stima di mercato.</span>
+                                <input type="checkbox" name="richiede_stima" id="richiede-stima" class="sr-only">
                             </div>
-                            <input type="hidden" name="prezzo" id="prezzo-val">
                         </div>
                     </div>
                 </div>
@@ -954,6 +963,38 @@
         /* Multi-step form */
         .form-step { position: relative; }
         .rpill-lg { width:100%; padding: 0.85rem 1.25rem; text-align:left; justify-content:flex-start; }
+
+        /* Stima toggle */
+        .stima-toggle {
+            display:flex; align-items:center; gap:12px; padding: 0.85rem 1rem;
+            border: 1px solid rgba(45,102,68,0.22); border-radius:8px; cursor:pointer;
+            background: rgba(45,102,68,0.04); transition: border-color 0.2s, background 0.2s;
+        }
+        .stima-toggle:hover { border-color: rgba(74,155,111,0.38); background: rgba(45,102,68,0.08); }
+        .stima-toggle.active { border-color: #4a9b6f; background: rgba(45,102,68,0.14); }
+        .stima-box {
+            width:18px; height:18px; border-radius:4px; flex-shrink:0;
+            border: 1px solid rgba(74,155,111,0.4); display:flex; align-items:center; justify-content:center;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .stima-toggle.active .stima-box { background: #4a9b6f; border-color: #4a9b6f; }
+
+        /* Google Maps autocomplete dropdown */
+        .pac-container {
+            background: #162a1e; border: 1px solid rgba(45,102,68,0.30);
+            border-radius: 6px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            margin-top: 4px; font-family: 'DM Sans', sans-serif;
+        }
+        .pac-item {
+            border-color: rgba(45,102,68,0.12); color: rgba(250,248,244,0.65);
+            padding: 10px 14px; cursor:pointer; font-size: 13px;
+        }
+        .pac-item:hover, .pac-item-selected { background: rgba(45,102,68,0.18); }
+        .pac-item-query { color: rgba(250,248,244,0.88); font-size: 13px; }
+        .pac-matched { color: #4a9b6f; font-weight:600; }
+        .pac-icon, .pac-icon-icon { display:none; }
+        .hdpi .pac-icon { display:none; }
+
         .upload-zone {
             display: flex; flex-direction: column; align-items: center;
             padding: 2.5rem 1.5rem; border-radius: 8px; cursor: pointer;
@@ -1058,6 +1099,42 @@
 
         document.querySelectorAll('.fi').forEach(f => f.addEventListener('input', () => { f.style.borderColor = ''; }));
 
+        // Google Maps autocomplete (chiamato dal callback Maps API)
+        window.initMapsAutocomplete = function() {
+            const input = document.getElementById('indirizzo-autocomplete');
+            if (!input || !window.google) return;
+            const ac = new google.maps.places.Autocomplete(input, {
+                types: ['geocode'],
+                componentRestrictions: { country: 'it' },
+                fields: ['formatted_address']
+            });
+            ac.addListener('place_changed', () => {
+                const place = ac.getPlace();
+                if (place.formatted_address) {
+                    input.value = place.formatted_address;
+                    input.style.borderColor = '';
+                }
+            });
+        };
+
+        // Stima di mercato toggle
+        const stimaToggle = document.getElementById('stima-toggle');
+        const stimaInput  = document.getElementById('richiede-stima');
+        const prezzoInput = document.getElementById('prezzo-input');
+        const stimaIcon   = document.getElementById('stima-check-icon');
+
+        if (stimaToggle) {
+            stimaToggle.addEventListener('click', () => {
+                stimaInput.checked = !stimaInput.checked;
+                const on = stimaInput.checked;
+                stimaToggle.classList.toggle('active', on);
+                stimaIcon.style.display = on ? 'block' : 'none';
+                prezzoInput.style.opacity = on ? '0.35' : '1';
+                prezzoInput.style.pointerEvents = on ? 'none' : 'auto';
+                if (on) prezzoInput.value = '';
+            });
+        }
+
         // Foto preview
         document.getElementById('foto-input').addEventListener('change', function() {
             const grid = document.getElementById('foto-preview');
@@ -1086,19 +1163,29 @@
         // Submit con qualificazione
         document.getElementById('lead-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const nome      = this.querySelector('[name="nome"]').value.trim();
-            const cognome   = this.querySelector('[name="cognome"]').value.trim();
-            const telefono  = this.querySelector('[name="telefono"]').value.trim();
-            const indirizzo = this.querySelector('[name="indirizzo"]').value.trim();
-            const stato     = document.getElementById('stato-val').value;
-            const mq        = document.getElementById('mq-val').value;
-            const prezzo    = document.getElementById('prezzo-val').value;
-            const motivo    = document.getElementById('motivo-val').value;
-            const urgenza   = document.getElementById('urgenza-val').value;
-            const hasFoto   = document.getElementById('foto-input').files.length > 0;
-            const hasPlan   = document.getElementById('planimetria-input').files.length > 0;
+            const nome          = this.querySelector('[name="nome"]').value.trim();
+            const cognome       = this.querySelector('[name="cognome"]').value.trim();
+            const telefono      = this.querySelector('[name="telefono"]').value.trim();
+            const indirizzo     = this.querySelector('[name="indirizzo"]').value.trim();
+            const stato         = document.getElementById('stato-val').value;
+            const mq            = document.getElementById('mq-val').value;
+            const motivo        = document.getElementById('motivo-val').value;
+            const urgenza       = document.getElementById('urgenza-val').value;
+            const prezzoLibero  = document.getElementById('prezzo-input').value.trim();
+            const richiedeStima = document.getElementById('richiede-stima').checked;
+            const hasFoto       = document.getElementById('foto-input').files.length > 0;
+            const hasPlan       = document.getElementById('planimetria-input').files.length > 0;
 
-            const nonQualificato = stato === 'ristrutturato' || mq === 'oltre_80' || prezzo === 'oltre_70';
+            // Qualificazione prezzo: no stima richiesta + prezzo > 100K
+            function parsePrezzoNum(v) {
+                if (!v) return null;
+                const n = parseFloat(v.replace(/[.\s]/g, '').replace(',', '.'));
+                return isNaN(n) ? null : n;
+            }
+            const prezzoNum = parsePrezzoNum(prezzoLibero);
+            const prezzoFuoriRange = !richiedeStima && prezzoNum !== null && prezzoNum > 100000;
+
+            const nonQualificato = stato === 'ristrutturato' || mq === 'oltre_80' || prezzoFuoriRange;
 
             document.getElementById('form-progress-wrap').style.display = 'none';
             this.style.display = 'none';
@@ -1109,19 +1196,19 @@
             } else {
                 const mqMap = { sotto_45:'sotto 45mq', '45_65':'45-65mq', '65_80':'65-80mq', oltre_80:'oltre 80mq' };
                 const stMap = { da_ristrutturare:'da ristrutturare', parzialmente:'parzialmente da ristrutturare', buono:'buono stato', ristrutturato:'già ristrutturato' };
-                const prMap = { sotto_30:'sotto 30K', '30_50':'30-50K', '50_70':'50-70K', oltre_70:'oltre 70K' };
                 let msg = `Ciao Reviva, mi chiamo ${nome} ${cognome} (tel. ${telefono}).`;
                 if (indirizzo) msg += ` Immobile: ${indirizzo}.`;
                 if (mq) msg += ` Superficie: ${mqMap[mq]||mq}.`;
                 if (stato) msg += ` Stato: ${stMap[stato]||stato}.`;
-                if (prezzo) msg += ` Prezzo richiesto: ${prMap[prezzo]||prezzo}.`;
+                if (richiedeStima) { msg += ' Richiedo una stima del valore di mercato.'; }
+                else if (prezzoLibero) { msg += ` Prezzo richiesto: ${prezzoLibero} euro.`; }
                 if (hasFoto||hasPlan) msg += ' Allego foto e planimetria nel prossimo messaggio.';
                 document.getElementById('wa-result-link').href = 'https://wa.me/393495531209?text=' + encodeURIComponent(msg);
                 if (hasFoto||hasPlan) document.getElementById('result-attach-note').style.display = 'block';
                 document.getElementById('result-yes').style.display = 'block';
                 document.getElementById('result-yes').scrollIntoView({ behavior:'smooth', block:'center' });
             }
-            console.log('[Reviva Lead]', { nome, cognome, telefono, indirizzo, stato, mq, prezzo, motivo, urgenza, qualificato:!nonQualificato, hasFoto, hasPlan });
+            console.log('[Reviva Lead]', { nome, cognome, telefono, indirizzo, stato, mq, prezzoLibero, richiedeStima, motivo, urgenza, qualificato:!nonQualificato, hasFoto, hasPlan });
         });
 
         // Floating button: mostra dopo 300px di scroll
