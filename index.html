@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviva Immobiliare — Vendi casa senza agenzia</title>
+    <meta name="description" content="Reviva acquista appartamenti da ristrutturare direttamente dal proprietario. Nessuna agenzia, nessuna commissione, accordo diretto.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Cormorant Garamond', 'serif'],
+                        sans:    ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        forest:      '#0c1a11',
+                        'forest-2':  '#162a1e',
+                        green:       '#2d6644',
+                        'green-mid': '#4a9b6f',
+                        cream:       '#f5f0e8',
+                        warm:        '#faf8f4',
+                        ink:         '#1a1a16',
+                        muted:       '#6b7970',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        * { font-family: 'DM Sans', sans-serif; }
+        h1, h2, h3, .display { font-family: 'Cormorant Garamond', serif; }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            opacity: 0.022;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        .hero-bg {
+            background:
+                radial-gradient(ellipse 55% 55% at 10% 70%, rgba(45,102,68,0.22) 0%, transparent 65%),
+                radial-gradient(ellipse 40% 40% at 90% 15%, rgba(74,155,111,0.10) 0%, transparent 65%),
+                #0c1a11;
+        }
+        .form-bg {
+            background:
+                radial-gradient(ellipse 50% 60% at 85% 85%, rgba(45,102,68,0.18) 0%, transparent 60%),
+                #162a1e;
+        }
+        .checklist-bg {
+            background:
+                radial-gradient(ellipse 60% 50% at 80% 20%, rgba(74,155,111,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 15% 80%, rgba(45,102,68,0.15) 0%, transparent 60%),
+                #0f2118;
+        }
+
+        .logotype {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        /* Ticker */
+        .ticker-wrap { overflow: hidden; white-space: nowrap; }
+        .ticker-track { display: inline-flex; animation: ticker 30s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(26,26,22,0.38);
+        }
+        .ticker-dot {
+            display: inline-block;
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: #2d6644;
+            vertical-align: middle;
+            margin: 0 0.5rem;
+            opacity: 0.45;
+        }
+
+        /* Process timeline */
+        .step-circle {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            border: 2px solid #2d6644;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d6644;
+            position: relative;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+        .step-circle.faded {
+            border-color: rgba(45,102,68,0.3);
+            color: rgba(45,102,68,0.4);
+        }
+        .step-line {
+            height: 1px;
+            flex: 1;
+            background: linear-gradient(90deg, #2d6644 0%, rgba(45,102,68,0.2) 100%);
+        }
+        .step-line.faded {
+            background: rgba(45,102,68,0.12);
+        }
+
+        /* Comparison table */
+        .cmp-head-reviva {
+            background: rgba(45,102,68,0.08);
+            border-top: 2px solid #2d6644;
+            color: #2d6644;
+        }
+        .cmp-head-agency {
+            background: rgba(26,26,22,0.03);
+            color: #6b7970;
+        }
+        .cmp-cell-reviva {
+            background: rgba(45,102,68,0.05);
+            color: #2d6644;
+            font-weight: 600;
+        }
+        .cmp-cell-agency {
+            background: rgba(26,26,22,0.02);
+            color: #6b7970;
+        }
+
+        /* Checklist card */
+        .check-card {
+            border: 1px solid rgba(74,155,111,0.18);
+            background: rgba(45,102,68,0.09);
+            border-radius: 2px;
+            padding: 1.25rem 1.25rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            transition: border-color 0.25s, background 0.25s;
+        }
+        .check-card:hover {
+            border-color: rgba(74,155,111,0.38);
+            background: rgba(45,102,68,0.14);
+        }
+        .check-icon {
+            width: 20px; height: 20px;
+            border-radius: 2px;
+            background: #2d6644;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Form inputs */
+        .fi {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(74,155,111,0.18);
+            color: #faf8f4;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            border-radius: 2px;
+            transition: border-color 0.25s, background 0.25s;
+            outline: none;
+        }
+        .fi::placeholder { color: rgba(250,248,244,0.22); }
+        .fi:focus { border-color: rgba(74,155,111,0.55); background: rgba(255,255,255,0.06); }
+        .fi option { background: #162a1e; color: #faf8f4; }
+
+        label.fl {
+            display: block;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(250,248,244,0.40);
+            margin-bottom: 0.5rem;
+        }
+
+        .rpill {
+            border: 1px solid rgba(74,155,111,0.18);
+            border-radius: 2px;
+            padding: 0.6rem 0.75rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .rpill span { font-size: 0.75rem; color: rgba(250,248,244,0.45); transition: color 0.2s; }
+        .rpill:hover { border-color: rgba(74,155,111,0.45); }
+        .rpill:hover span { color: rgba(250,248,244,0.8); }
+        .rpill.active { border-color: rgba(74,155,111,0.8); background: rgba(74,155,111,0.10); }
+        .rpill.active span { color: #4a9b6f; }
+
+        .btn-primary {
+            background: #2d6644;
+            color: #faf8f4;
+            font-weight: 600;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 1rem 2rem;
+            border-radius: 2px;
+            display: inline-block;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary:hover { background: #3a7d55; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(45,102,68,0.35); }
+        .btn-primary:active { transform: translateY(0); }
+
+        .btn-outline {
+            border: 1px solid rgba(250,248,244,0.20);
+            color: rgba(250,248,244,0.60);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 1rem 2rem;
+            border-radius: 2px;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .btn-outline:hover { border-color: rgba(250,248,244,0.40); color: rgba(250,248,244,0.90); }
+
+        .val-pill {
+            border: 1px solid rgba(45,102,68,0.22);
+            border-radius: 100px;
+            padding: 0.4rem 1.1rem;
+            display: inline-block;
+            font-size: 0.75rem;
+            color: #2d6644;
+            letter-spacing: 0.03em;
+        }
+
+        .rule { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(45,102,68,0.4) 50%, transparent 100%); }
+
+        .fi-anim { opacity: 0; transform: translateY(28px); }
+        #success-msg { display: none; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0c1a11; }
+        ::-webkit-scrollbar-thumb { background: rgba(45,102,68,0.4); border-radius: 2px; }
+
+        /* Comparison table row hover */
+        .cmp-row:hover .cmp-cell-reviva { background: rgba(45,102,68,0.09); }
+        .cmp-row:hover .cmp-cell-agency { background: rgba(26,26,22,0.04); }
+    </style>
+</head>
+
+<body class="bg-forest text-warm overflow-x-hidden">
+
+    <!-- NAV -->
+    <nav id="nav" class="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-5 flex justify-between items-center transition-all duration-300"
+         style="background: linear-gradient(to bottom, rgba(12,26,17,0.96) 0%, transparent 100%);">
+        <span class="logotype text-warm">Reviva</span>
+        <a href="#valutazione" class="btn-primary text-xs py-2 px-5">Valutazione gratuita</a>
+    </nav>
+
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="hero-bg min-h-screen flex flex-col justify-center px-6 md:px-16 lg:px-24 pt-28 pb-24">
+        <div class="max-w-5xl mx-auto w-full">
+            <div class="fi-anim mb-5">
+                <span class="text-xs tracking-[0.3em] uppercase" style="color: rgba(74,155,111,0.7);">
+                    Ferrara &nbsp;&middot;&nbsp; Valorizzazione immobiliare
+                </span>
+            </div>
+            <h1 class="fi-anim font-display font-semibold leading-[1.02] mb-6 text-warm"
+                style="font-size: clamp(3rem, 7.5vw, 6rem);">
+                Vendi casa<br>senza agenzia.
+            </h1>
+            <p class="fi-anim max-w-xl leading-relaxed mb-3 font-light" style="font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(250,248,244,0.55);">
+                Hai un appartamento da ristrutturare?
+            </p>
+            <p class="fi-anim max-w-xl leading-relaxed mb-10 font-light" style="font-size: clamp(0.95rem, 1.8vw, 1.05rem); color: rgba(250,248,244,0.40);">
+                Analizziamo il suo potenziale, definiamo un accordo diretto
+                e ci occupiamo della valorizzazione dell'immobile.
+            </p>
+            <div class="fi-anim flex flex-wrap gap-4">
+                <a href="#valutazione" class="btn-primary">Richiedi una valutazione gratuita</a>
+                <a href="#processo" class="btn-outline">Scopri come funziona</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════ TICKER ═══════════ -->
+    <div class="bg-cream py-4 border-y border-ink/5 ticker-wrap">
+        <div class="ticker-track">
+            <span class="ticker-item">Vendi casa senza agenzia</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Nessuna commissione di intermediazione</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Gestiamo noi il processo</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Accordo diretto con il proprietario</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Più semplice per chi vende</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Più valore per chi compra</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Nessuna gestione di ristrutturazioni</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Vendi casa senza agenzia</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Nessuna commissione di intermediazione</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Gestiamo noi il processo</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Accordo diretto con il proprietario</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Più semplice per chi vende</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Più valore per chi compra</span><span class="ticker-dot"></span>
+            <span class="ticker-item">Nessuna gestione di ristrutturazioni</span><span class="ticker-dot"></span>
+        </div>
+    </div>
+
+
+    <!-- ═══════════ COSA VEDE IL VENDITORE ═══════════ -->
+    <section class="bg-warm py-20 md:py-32 px-6 md:px-16 lg:px-24">
+        <div class="max-w-5xl mx-auto">
+            <div class="fi-anim mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div>
+                    <p class="text-xs tracking-[0.25em] uppercase mb-4" style="color: #4a9b6f;">Per chi vende</p>
+                    <h2 class="font-display font-semibold text-ink leading-tight"
+                        style="font-size: clamp(2rem, 5vw, 3.5rem);">
+                        Un'unica soluzione.<br>Nessuna complicazione.
+                    </h2>
+                </div>
+                <p class="text-muted text-sm leading-relaxed max-w-xs">
+                    Vendiamo il processo come dovrebbe essere: lineare,
+                    prevedibile, senza sorprese.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-5 gap-px" style="background: rgba(26,26,22,0.07);">
+                <div class="fi-anim bg-warm p-8">
+                    <div class="w-8 h-px mb-6" style="background: #2d6644;"></div>
+                    <h3 class="font-display text-xl text-ink font-semibold mb-3">Un interlocutore unico</h3>
+                    <p class="text-muted text-sm leading-relaxed">Parli con noi, solo con noi. Nessuna agenzia di mezzo, nessun terzo che rallenta.</p>
+                </div>
+                <div class="fi-anim bg-warm p-8">
+                    <div class="w-8 h-px mb-6" style="background: #2d6644;"></div>
+                    <h3 class="font-display text-xl text-ink font-semibold mb-3">Nessun incarico</h3>
+                    <p class="text-muted text-sm leading-relaxed">Non firmi nessun mandato. Non paghi nessuna provvigione. L'accordo è tra te e Reviva.</p>
+                </div>
+                <div class="fi-anim bg-warm p-8">
+                    <div class="w-8 h-px mb-6" style="background: #2d6644;"></div>
+                    <h3 class="font-display text-xl text-ink font-semibold mb-3">Nessuna gestione lavori</h3>
+                    <p class="text-muted text-sm leading-relaxed">Ristrutturazione coordinata e finanziata da noi. Tu non fai niente: né cantiere, né artigiani.</p>
+                </div>
+                <div class="fi-anim bg-warm p-8">
+                    <div class="w-8 h-px mb-6" style="background: #2d6644;"></div>
+                    <h3 class="font-display text-xl text-ink font-semibold mb-3">Nessuna visita infinita</h3>
+                    <p class="text-muted text-sm leading-relaxed">Una visita sola, poi definiamo l'accordo. Niente acquirenti da accompagnare, niente weekend persi.</p>
+                </div>
+                <div class="fi-anim bg-warm p-8">
+                    <div class="w-8 h-px mb-6" style="background: #2d6644;"></div>
+                    <h3 class="font-display text-xl text-ink font-semibold mb-3">Accordo chiaro dall'inizio</h3>
+                    <p class="text-muted text-sm leading-relaxed">Prezzo, tempi e garanzie definite nel preliminare. Nessuna rinegoziazione a sorpresa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════ POSITIONING ═══════════ -->
+    <section class="py-16 md:py-20 px-6 md:px-16 lg:px-24" style="background: #2d6644;">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="fi-anim font-display font-semibold text-warm leading-snug"
+               style="font-size: clamp(1.6rem, 4vw, 2.8rem);">
+                Non siamo un'agenzia immobiliare.<br>
+                Non siamo un'impresa edile.<br>
+                <em class="font-normal italic" style="color: rgba(250,248,244,0.55);">
+                    Siamo una società specializzata<br>nella valorizzazione di immobili da ristrutturare.
+                </em>
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ═══════════ PROCESSO (5 step) ═══════════ -->
+    <section id="processo" class="bg-cream py-20 md:py-32 px-6 md:px-16 lg:px-24 overflow-hidden">
+        <div class="max-w-5xl mx-auto">
+
+            <div class="fi-anim mb-16">
+                <p class="text-xs tracking-[0.25em] uppercase mb-4" style="color: #4a9b6f;">Il processo</p>
+                <h2 class="font-display font-semibold text-ink leading-tight"
+                    style="font-size: clamp(2rem, 5vw, 3.5rem);">
+                    Dal primo contatto<br>
+                    <em class="font-normal italic text-muted">alla stipula.</em>
+                </h2>
+            </div>
+
+            <!-- Desktop: horizontal timeline -->
+            <div class="hidden md:block">
+
+                <!-- Circle row with connecting lines -->
+                <div class="flex items-center mb-8">
+                    <div class="step-circle">1</div>
+                    <div class="step-line"></div>
+                    <div class="step-circle">2</div>
+                    <div class="step-line"></div>
+                    <div class="step-circle">3</div>
+                    <div class="step-line"></div>
+                    <div class="step-circle">4</div>
+                    <div class="step-line faded"></div>
+                    <div class="step-circle faded">5</div>
+                </div>
+
+                <!-- Labels row -->
+                <div class="grid grid-cols-5 gap-4">
+                    <div class="fi-anim pr-4">
+                        <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: #2d6644;">Form</p>
+                        <p class="text-muted text-xs leading-relaxed">Compili il modulo con i dati dell'immobile. Ci vogliono 5 minuti.</p>
+                    </div>
+                    <div class="fi-anim pr-4">
+                        <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: #2d6644;">Valutazione</p>
+                        <p class="text-muted text-xs leading-relaxed">Analizziamo il potenziale e la planimetria. Ti ricontattiamo entro 24 ore.</p>
+                    </div>
+                    <div class="fi-anim pr-4">
+                        <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: #2d6644;">Proposta</p>
+                        <p class="text-muted text-xs leading-relaxed">Offerta scritta con prezzo e condizioni definite. Niente da interpretare.</p>
+                    </div>
+                    <div class="fi-anim pr-4">
+                        <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: #2d6644;">Preliminare</p>
+                        <p class="text-muted text-xs leading-relaxed">Contratto dal tuo notaio di fiducia. Caparra versata contestualmente alla firma.</p>
+                    </div>
+                    <div class="fi-anim">
+                        <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: rgba(45,102,68,0.45);">Stipula</p>
+                        <p class="text-xs leading-relaxed" style="color: rgba(107,121,112,0.55);">Il rogito notarile completa il trasferimento di proprietà. Operazione conclusa.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile: vertical -->
+            <div class="md:hidden space-y-6">
+                <div class="fi-anim flex gap-5 items-start">
+                    <div class="step-circle shrink-0">1</div>
+                    <div class="pt-2">
+                        <p class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: #2d6644;">Form</p>
+                        <p class="text-muted text-xs leading-relaxed">Compili il modulo con i dati dell'immobile. Ci vogliono 5 minuti.</p>
+                    </div>
+                </div>
+                <div class="ml-5 w-px h-6" style="background: rgba(45,102,68,0.25);"></div>
+                <div class="fi-anim flex gap-5 items-start">
+                    <div class="step-circle shrink-0">2</div>
+                    <div class="pt-2">
+                        <p class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: #2d6644;">Valutazione</p>
+                        <p class="text-muted text-xs leading-relaxed">Analizziamo il potenziale e la planimetria. Risposta entro 24 ore.</p>
+                    </div>
+                </div>
+                <div class="ml-5 w-px h-6" style="background: rgba(45,102,68,0.25);"></div>
+                <div class="fi-anim flex gap-5 items-start">
+                    <div class="step-circle shrink-0">3</div>
+                    <div class="pt-2">
+                        <p class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: #2d6644;">Proposta</p>
+                        <p class="text-muted text-xs leading-relaxed">Offerta scritta con prezzo e condizioni definite.</p>
+                    </div>
+                </div>
+                <div class="ml-5 w-px h-6" style="background: rgba(45,102,68,0.25);"></div>
+                <div class="fi-anim flex gap-5 items-start">
+                    <div class="step-circle shrink-0">4</div>
+                    <div class="pt-2">
+                        <p class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: #2d6644;">Preliminare</p>
+                        <p class="text-muted text-xs leading-relaxed">Contratto dal tuo notaio. Caparra versata contestualmente alla firma.</p>
+                    </div>
+                </div>
+                <div class="ml-5 w-px h-6" style="background: rgba(45,102,68,0.12);"></div>
+                <div class="fi-anim flex gap-5 items-start">
+                    <div class="step-circle faded shrink-0">5</div>
+                    <div class="pt-2">
+                        <p class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: rgba(45,102,68,0.45);">Stipula</p>
+                        <p class="text-xs leading-relaxed" style="color: rgba(107,121,112,0.55);">Il rogito notarile completa il trasferimento. Operazione conclusa.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ═══════════ CONFRONTO ═══════════ -->
+    <section class="bg-warm py-20 md:py-32 px-6 md:px-16 lg:px-24">
+        <div class="max-w-4xl mx-auto">
+
+            <div class="fi-anim mb-14">
+                <p class="text-xs tracking-[0.25em] uppercase mb-4" style="color: #4a9b6f;">Confronto</p>
+                <h2 class="font-display font-semibold text-ink leading-tight"
+                    style="font-size: clamp(2rem, 5vw, 3rem);">
+                    Reviva vs agenzia tradizionale.
+                </h2>
+            </div>
+
+            <div class="overflow-x-auto -mx-6 px-6 md:mx-0 md:px-0">
+                <table style="width: 100%; border-collapse: separate; border-spacing: 0; min-width: 520px;">
+                    <thead>
+                        <tr>
+                            <th class="text-left py-4 px-5 text-xs tracking-wide uppercase text-muted font-normal bg-warm" style="width: 42%;">Aspetto</th>
+                            <th class="cmp-head-reviva py-4 px-5 text-xs tracking-wide uppercase font-semibold text-center" style="border-radius: 2px 2px 0 0;">Reviva</th>
+                            <th class="cmp-head-agency py-4 px-5 text-xs tracking-wide uppercase font-normal text-center" style="border-radius: 2px 2px 0 0;">Agenzia tradizionale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="cmp-row fi-anim" style="border-bottom: 1px solid rgba(26,26,22,0.06);">
+                            <td class="py-4 px-5 text-sm text-ink" style="border-bottom: 1px solid rgba(26,26,22,0.06);">Commissioni a carico del venditore</td>
+                            <td class="cmp-cell-reviva py-4 px-5 text-center text-sm">0€</td>
+                            <td class="cmp-cell-agency py-4 px-5 text-center text-sm">3–5% + IVA</td>
+                        </tr>
+                        <tr class="cmp-row fi-anim" style="border-bottom: 1px solid rgba(26,26,22,0.06);">
+                            <td class="py-4 px-5 text-sm text-ink" style="border-bottom: 1px solid rgba(26,26,22,0.06);">Visite da gestire</td>
+                            <td class="cmp-cell-reviva py-4 px-5 text-center text-sm">Una sola</td>
+                            <td class="cmp-cell-agency py-4 px-5 text-center text-sm">Decine</td>
+                        </tr>
+                        <tr class="cmp-row fi-anim" style="border-bottom: 1px solid rgba(26,26,22,0.06);">
+                            <td class="py-4 px-5 text-sm text-ink" style="border-bottom: 1px solid rgba(26,26,22,0.06);">Gestione della ristrutturazione</td>
+                            <td class="cmp-cell-reviva py-4 px-5 text-center text-sm">Reviva</td>
+                            <td class="cmp-cell-agency py-4 px-5 text-center text-sm">Il venditore</td>
+                        </tr>
+                        <tr class="cmp-row fi-anim" style="border-bottom: 1px solid rgba(26,26,22,0.06);">
+                            <td class="py-4 px-5 text-sm text-ink" style="border-bottom: 1px solid rgba(26,26,22,0.06);">Tempi di risposta</td>
+                            <td class="cmp-cell-reviva py-4 px-5 text-center text-sm">24–48 ore</td>
+                            <td class="cmp-cell-agency py-4 px-5 text-center text-sm">Settimane</td>
+                        </tr>
+                        <tr class="cmp-row fi-anim" style="border-bottom: 1px solid rgba(26,26,22,0.06);">
+                            <td class="py-4 px-5 text-sm text-ink" style="border-bottom: 1px solid rgba(26,26,22,0.06);">Certezza del prezzo finale</td>
+                            <td class="cmp-cell-reviva py-4 px-5 text-center text-sm">Definita contrattualmente</td>
+                            <td class="cmp-cell-agency py-4 px-5 text-center text-sm">Soggetta a offerte</td>
+                        </tr>
+                        <tr class="cmp-row fi-anim" style="border-bottom: 1px solid rgba(26,26,22,0.06);">
+                            <td class="py-4 px-5 text-sm text-ink" style="border-bottom: 1px solid rgba(26,26,22,0.06);">Interlocutori durante il processo</td>
+                            <td class="cmp-cell-reviva py-4 px-5 text-center text-sm">Uno</td>
+                            <td class="cmp-cell-agency py-4 px-5 text-center text-sm">Agenzia, acquirenti, notai multipli</td>
+                        </tr>
+                        <tr class="cmp-row fi-anim">
+                            <td class="py-4 px-5 text-sm text-ink">Mandato da firmare</td>
+                            <td class="cmp-cell-reviva py-4 px-5 text-center text-sm" style="border-radius: 0 0 2px 2px;">No</td>
+                            <td class="cmp-cell-agency py-4 px-5 text-center text-sm" style="border-radius: 0 0 2px 2px;">Sì (spesso in esclusiva)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ═══════════ VALORI ═══════════ -->
+    <section class="bg-cream py-14 px-6 md:px-16 lg:px-24">
+        <div class="max-w-5xl mx-auto flex flex-wrap gap-3 items-center justify-center">
+            <span class="fi-anim val-pill">Semplicità</span>
+            <span class="fi-anim val-pill">Concretezza</span>
+            <span class="fi-anim val-pill">Rapidità</span>
+            <span class="fi-anim val-pill">Trasparenza</span>
+            <span class="fi-anim val-pill">Rigenerazione</span>
+            <span class="fi-anim val-pill">Creazione di valore</span>
+        </div>
+    </section>
+
+
+    <!-- ═══════════ CHECKLIST ═══════════ -->
+    <section class="checklist-bg py-20 md:py-32 px-6 md:px-16 lg:px-24">
+        <div class="max-w-5xl mx-auto">
+
+            <div class="fi-anim mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div>
+                    <p class="text-xs tracking-[0.25em] uppercase mb-4" style="color: rgba(74,155,111,0.7);">Criteri di selezione</p>
+                    <h2 class="font-display font-semibold text-warm leading-tight"
+                        style="font-size: clamp(2rem, 5vw, 3.2rem);">
+                        Cosa cerchiamo<br>in un immobile.
+                    </h2>
+                </div>
+                <p class="text-sm leading-relaxed max-w-sm" style="color: rgba(250,248,244,0.38);">
+                    Non è necessario che siano presenti tutti i criteri.
+                    Anche un match parziale è un buon punto di partenza per una valutazione.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+
+                <div class="fi-anim check-card">
+                    <div class="check-icon">
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#faf8f4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div>
+                        <p class="text-warm text-sm font-medium mb-1 leading-snug">Distribuzione degli spazi ottimizzata</p>
+                        <p class="text-xs leading-relaxed" style="color: rgba(250,248,244,0.38);">
+                            Nessuna modifica strutturale necessaria. Verifichiamo con la planimetria catastale prima di procedere.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="fi-anim check-card">
+                    <div class="check-icon">
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#faf8f4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div>
+                        <p class="text-warm text-sm font-medium mb-1 leading-snug">Infissi da rifare</p>
+                        <p class="text-xs leading-relaxed" style="color: rgba(250,248,244,0.38);">
+                            Finestre e porte finestre datate o deteriorate. Intervento ad alto impatto sul valore percepito.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="fi-anim check-card">
+                    <div class="check-icon">
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#faf8f4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div>
+                        <p class="text-warm text-sm font-medium mb-1 leading-snug">Pavimenti da rifare</p>
+                        <p class="text-xs leading-relaxed" style="color: rgba(250,248,244,0.38);">
+                            Materiali usurati o datati. La posa di LVT su tutta la superficie genera il miglior rapporto costo/valore.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="fi-anim check-card">
+                    <div class="check-icon">
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#faf8f4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div>
+                        <p class="text-warm text-sm font-medium mb-1 leading-snug">Bagno da rifare</p>
+                        <p class="text-xs leading-relaxed" style="color: rgba(250,248,244,0.38);">
+                            Sanitari e rivestimenti datati o degradati. Il bagno è il primo elemento su cui si concentra l'acquirente finale.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="fi-anim check-card">
+                    <div class="check-icon">
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#faf8f4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div>
+                        <p class="text-warm text-sm font-medium mb-1 leading-snug">Porte interne da cambiare</p>
+                        <p class="text-xs leading-relaxed" style="color: rgba(250,248,244,0.38);">
+                            Modelli datati o deteriorati. Sostituirle è rapido e cambia completamente la percezione degli spazi.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="fi-anim check-card">
+                    <div class="check-icon">
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#faf8f4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div>
+                        <p class="text-warm text-sm font-medium mb-1 leading-snug">Impianti già a norma</p>
+                        <p class="text-xs leading-relaxed" style="color: rgba(250,248,244,0.38);">
+                            Elettrico e idraulico conformi alla normativa vigente. Non è necessario un rifacimento completo degli impianti.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="fi-anim mt-10 text-center">
+                <a href="#valutazione" class="btn-primary">Verifica se il tuo immobile è adatto</a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ═══════════ FAQ ═══════════ -->
+    <section class="bg-warm py-20 md:py-32 px-6 md:px-16 lg:px-24">
+        <div class="max-w-3xl mx-auto">
+            <div class="fi-anim mb-16">
+                <p class="text-xs tracking-[0.25em] uppercase mb-4" style="color: #4a9b6f;">Domande frequenti</p>
+                <h2 class="font-display font-semibold text-ink leading-tight"
+                    style="font-size: clamp(2rem, 5vw, 3rem);">
+                    Le domande che ci fanno<br>di solito.
+                </h2>
+            </div>
+            <div class="divide-y divide-ink/8">
+                <div class="fi-anim py-8">
+                    <h3 class="font-display text-xl text-ink font-semibold mb-2">"Quanto risparmio senza agenzia?"</h3>
+                    <p class="text-muted text-sm leading-relaxed">Le agenzie applicano in genere il 3-5% sul prezzo di vendita, più IVA. Su un appartamento da 70.000€ parliamo di 4.000-6.000€. Con Reviva quella somma rimane nel tuo accordo.</p>
+                </div>
+                <div class="fi-anim py-8">
+                    <h3 class="font-display text-xl text-ink font-semibold mb-2">"Devo fare lavori prima di vendere?"</h3>
+                    <p class="text-muted text-sm leading-relaxed">No. Lavoriamo esattamente su immobili da ristrutturare. Non devi investire nulla, non devi coordinare nessun artigiano. Ci pensiamo noi.</p>
+                </div>
+                <div class="fi-anim py-8">
+                    <h3 class="font-display text-xl text-ink font-semibold mb-2">"Chi gestisce i lavori dopo la firma?"</h3>
+                    <p class="text-muted text-sm leading-relaxed">Reviva. Coordiniamo e finanziamo tutti gli interventi. Prima di iniziare redigiamo uno stato di consistenza dell'immobile. La responsabilità dei lavori è interamente nostra.</p>
+                </div>
+                <div class="fi-anim py-8">
+                    <h3 class="font-display text-xl text-ink font-semibold mb-2">"Posso scegliere il notaio?"</h3>
+                    <p class="text-muted text-sm leading-relaxed">Sì. Il contratto preliminare viene redatto con il notaio che preferisci. Puoi far verificare ogni clausola da un tuo consulente: la trasparenza è uno dei nostri valori fondanti.</p>
+                </div>
+                <div class="fi-anim py-8">
+                    <h3 class="font-display text-xl text-ink font-semibold mb-2">"Che tipo di immobili cercate?"</h3>
+                    <p class="text-muted text-sm leading-relaxed">Appartamenti di piccolo e medio taglio a Ferrara e prima cintura, preferibilmente da ristrutturare. Anche abitati, affittati o sfitti: valutiamo ogni situazione.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════ FORM ═══════════ -->
+    <section id="valutazione" class="form-bg py-20 md:py-32 px-6 md:px-16 lg:px-24">
+        <div class="max-w-2xl mx-auto">
+            <div class="fi-anim mb-12">
+                <p class="text-xs tracking-[0.25em] uppercase mb-4" style="color: rgba(74,155,111,0.7);">Valutazione gratuita</p>
+                <h2 class="font-display font-semibold text-warm leading-tight mb-4"
+                    style="font-size: clamp(2rem, 5vw, 3rem);">
+                    Analizziamo il potenziale<br>del tuo immobile.
+                </h2>
+                <p class="text-sm leading-relaxed" style="color: rgba(250,248,244,0.40);">
+                    Compila il modulo. Ti rispondiamo entro 24 ore con una valutazione indicativa, senza impegno.
+                </p>
+            </div>
+
+            <form id="lead-form" class="fi-anim space-y-10" novalidate>
+
+                <div class="space-y-5">
+                    <p class="text-xs tracking-[0.2em] uppercase" style="color: rgba(74,155,111,0.7);">01&nbsp;&nbsp;L'immobile</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="fl">Via e numero civico</label>
+                            <input class="fi" type="text" name="indirizzo" placeholder="es. Via Roma 14">
+                        </div>
+                        <div>
+                            <label class="fl">Quartiere / zona</label>
+                            <input class="fi" type="text" name="zona" placeholder="es. Centro, Barco, Via Po…">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <label class="fl">Superficie (mq)</label>
+                            <input class="fi" type="number" name="mq" placeholder="es. 55">
+                        </div>
+                        <div>
+                            <label class="fl">Piano</label>
+                            <input class="fi" type="text" name="piano" placeholder="es. 2° con asc.">
+                        </div>
+                        <div>
+                            <label class="fl">Anno costruzione</label>
+                            <input class="fi" type="text" name="anno" placeholder="es. 1975">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl" style="margin-bottom: 0.75rem;">Stato attuale</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2" data-group="stato">
+                            <div class="rpill" data-value="da_ristrutturare"><span>Da ristrutturare</span></div>
+                            <div class="rpill" data-value="parzialmente"><span>Parzialmente</span></div>
+                            <div class="rpill" data-value="buono"><span>Buono stato</span></div>
+                            <div class="rpill" data-value="ristrutturato"><span>Ristrutturato</span></div>
+                        </div>
+                        <input type="hidden" name="stato" id="stato-val">
+                    </div>
+                    <div>
+                        <label class="fl">Note (opzionale)</label>
+                        <textarea class="fi resize-none" name="note" rows="2" placeholder="es. bagno da rifare, finestre anni 70, umidità…"></textarea>
+                    </div>
+                </div>
+
+                <div class="rule"></div>
+
+                <div class="space-y-5">
+                    <p class="text-xs tracking-[0.2em] uppercase" style="color: rgba(74,155,111,0.7);">02&nbsp;&nbsp;La tua situazione</p>
+                    <div>
+                        <label class="fl" style="margin-bottom: 0.75rem;">Perché stai pensando di vendere?</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2" data-group="motivo">
+                            <div class="rpill" data-value="cambio_casa"><span>Cambio casa</span></div>
+                            <div class="rpill" data-value="liquidita"><span>Necessità liquidità</span></div>
+                            <div class="rpill" data-value="eredita"><span>Eredità</span></div>
+                            <div class="rpill" data-value="non_uso"><span>Non lo uso più</span></div>
+                        </div>
+                        <input type="hidden" name="motivo" id="motivo-val">
+                    </div>
+                    <div>
+                        <label class="fl" style="margin-bottom: 0.75rem;">Con che urgenza?</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2" data-group="urgenza">
+                            <div class="rpill" data-value="prima_possibile"><span>Prima possibile</span></div>
+                            <div class="rpill" data-value="6_mesi"><span>Entro 6 mesi</span></div>
+                            <div class="rpill" data-value="anno"><span>Entro l'anno</span></div>
+                            <div class="rpill" data-value="no_fretta"><span>Nessuna fretta</span></div>
+                        </div>
+                        <input type="hidden" name="urgenza" id="urgenza-val">
+                    </div>
+                    <div>
+                        <label class="fl" style="margin-bottom: 0.75rem;">L'immobile è attualmente:</label>
+                        <div class="grid grid-cols-3 gap-2" data-group="uso">
+                            <div class="rpill" data-value="abitato"><span>Abitato</span></div>
+                            <div class="rpill" data-value="affittato"><span>Affittato</span></div>
+                            <div class="rpill" data-value="sfitto"><span>Vuoto / sfitto</span></div>
+                        </div>
+                        <input type="hidden" name="uso" id="uso-val">
+                    </div>
+                </div>
+
+                <div class="rule"></div>
+
+                <div class="space-y-5">
+                    <p class="text-xs tracking-[0.2em] uppercase" style="color: rgba(74,155,111,0.7);">03&nbsp;&nbsp;Il prezzo</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="fl">Prezzo di riferimento (€)</label>
+                            <input class="fi" type="text" name="prezzo" placeholder="es. 65.000">
+                        </div>
+                        <div>
+                            <label class="fl">Hai già un'agenzia incaricata?</label>
+                            <select class="fi" name="agenzia">
+                                <option value="" disabled selected>Seleziona…</option>
+                                <option value="no">No, cerco autonomamente</option>
+                                <option value="si">Sì, mandato in corso</option>
+                                <option value="contatti">Ho avuto contatti, niente firmato</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rule"></div>
+
+                <div class="space-y-5">
+                    <p class="text-xs tracking-[0.2em] uppercase" style="color: rgba(74,155,111,0.7);">04&nbsp;&nbsp;I tuoi contatti</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="fl">Nome e cognome *</label>
+                            <input class="fi" type="text" name="nome" required placeholder="Mario Rossi">
+                        </div>
+                        <div>
+                            <label class="fl">Telefono *</label>
+                            <input class="fi" type="tel" name="telefono" required placeholder="+39 333 000 0000">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Email (opzionale)</label>
+                        <input class="fi" type="email" name="email" placeholder="mario@email.it">
+                    </div>
+                    <div>
+                        <label class="fl" style="margin-bottom: 0.75rem;">Preferisci essere contattato via:</label>
+                        <div class="grid grid-cols-3 gap-2" data-group="contatto">
+                            <div class="rpill" data-value="chiamata"><span>Chiamata</span></div>
+                            <div class="rpill" data-value="whatsapp"><span>WhatsApp</span></div>
+                            <div class="rpill" data-value="email"><span>Email</span></div>
+                        </div>
+                        <input type="hidden" name="contatto_pref" id="contatto-val">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="btn-primary w-full py-4 text-center">
+                        Richiedi la valutazione gratuita
+                    </button>
+                    <p class="text-center mt-3 text-xs" style="color: rgba(250,248,244,0.20);">
+                        Risposta entro 24 ore. Nessun impegno, nessuna commissione.
+                    </p>
+                </div>
+
+            </form>
+
+            <div id="success-msg" class="text-center py-20">
+                <p class="font-display text-4xl text-warm font-semibold mb-4">Richiesta inviata.</p>
+                <p class="text-sm leading-relaxed max-w-sm mx-auto" style="color: rgba(250,248,244,0.40);">
+                    Il nostro team analizzerà i dati forniti e ti contatterà entro 24 ore
+                    con una prima valutazione indicativa.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer class="bg-forest py-12 px-6 md:px-16 lg:px-24" style="border-top: 1px solid rgba(45,102,68,0.14);">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+                <span class="logotype text-warm block mb-1">Reviva</span>
+                <p class="text-xs tracking-widest uppercase" style="color: rgba(250,248,244,0.22);">Immobiliare &middot; Ferrara</p>
+            </div>
+            <div class="flex flex-col gap-1 md:text-right text-sm">
+                <a href="tel:+39NUMERO" style="color: rgba(250,248,244,0.35);" class="hover:text-green-mid transition-colors">+39 [numero]</a>
+                <a href="mailto:info@revivaimmobiliare.it" style="color: rgba(250,248,244,0.35);" class="hover:text-green-mid transition-colors">info@revivaimmobiliare.it</a>
+            </div>
+        </div>
+        <div class="max-w-5xl mx-auto mt-8 pt-6 flex flex-col md:flex-row justify-between gap-4"
+             style="border-top: 1px solid rgba(45,102,68,0.10);">
+            <p class="text-xs" style="color: rgba(250,248,244,0.14);">Reviva Immobiliare &middot; P.IVA [da inserire] &middot; Ferrara</p>
+            <p class="text-xs" style="color: rgba(250,248,244,0.14);">Non siamo un'agenzia immobiliare.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.fi-anim').forEach((el, i) => {
+            gsap.fromTo(el,
+                { opacity: 0, y: 28 },
+                {
+                    opacity: 1, y: 0,
+                    duration: 0.75,
+                    ease: 'power2.out',
+                    delay: (i % 4) * 0.07,
+                    scrollTrigger: { trigger: el, start: 'top 87%', once: true }
+                }
+            );
+        });
+
+        document.querySelectorAll('[data-group]').forEach(group => {
+            const name   = group.dataset.group;
+            const hidden = document.getElementById(name + '-val');
+            group.querySelectorAll('.rpill').forEach(pill => {
+                pill.addEventListener('click', () => {
+                    group.querySelectorAll('.rpill').forEach(p => p.classList.remove('active'));
+                    pill.classList.add('active');
+                    if (hidden) hidden.value = pill.dataset.value;
+                });
+            });
+        });
+
+        document.getElementById('lead-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nome     = this.querySelector('[name="nome"]').value.trim();
+            const telefono = this.querySelector('[name="telefono"]').value.trim();
+            if (!nome || !telefono) {
+                alert('Inserisci nome e numero di telefono per continuare.');
+                return;
+            }
+            const data = Object.fromEntries(new FormData(this));
+            console.log('[Reviva Lead]', data);
+            this.style.display = 'none';
+            const msg = document.getElementById('success-msg');
+            msg.style.display = 'block';
+            msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                nav.style.background = 'rgba(12,26,17,0.97)';
+                nav.style.backdropFilter = 'blur(12px)';
+                nav.style.borderBottom = '1px solid rgba(45,102,68,0.15)';
+            } else {
+                nav.style.background = 'linear-gradient(to bottom, rgba(12,26,17,0.96) 0%, transparent 100%)';
+                nav.style.backdropFilter = 'none';
+                nav.style.borderBottom = 'none';
+            }
+        }, { passive: true });
+    </script>
+
+</body>
+</html>
