@@ -13,10 +13,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <!-- Google Maps Places API: sostituire GOOGLE_MAPS_API_KEY con la chiave reale (limitata al dominio) -->
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAPS_API_KEY&libraries=places&callback=initMapsAutocomplete">
-    </script>
 
     <script>
         tailwind.config = {
@@ -791,9 +787,7 @@
                         <div>
                             <label class="fl">Indirizzo *</label>
                             <input class="fi" type="text" name="indirizzo"
-                                   id="indirizzo-autocomplete"
-                                   placeholder="es. Via Roma 14, Ferrara"
-                                   autocomplete="off">
+                                   placeholder="es. Via Roma 14, Ferrara">
                         </div>
                         <div>
                             <label class="fl" style="margin-bottom:0.75rem;">Superficie</label>
@@ -979,23 +973,7 @@
         }
         .stima-toggle.active .stima-box { background: #4a9b6f; border-color: #4a9b6f; }
 
-        /* Google Maps autocomplete dropdown */
-        .pac-container {
-            background: #162a1e; border: 1px solid rgba(45,102,68,0.30);
-            border-radius: 6px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            margin-top: 4px; font-family: 'DM Sans', sans-serif;
-        }
-        .pac-item {
-            border-color: rgba(45,102,68,0.12); color: rgba(250,248,244,0.65);
-            padding: 10px 14px; cursor:pointer; font-size: 13px;
-        }
-        .pac-item:hover, .pac-item-selected { background: rgba(45,102,68,0.18); }
-        .pac-item-query { color: rgba(250,248,244,0.88); font-size: 13px; }
-        .pac-matched { color: #4a9b6f; font-weight:600; }
-        .pac-icon, .pac-icon-icon { display:none; }
-        .hdpi .pac-icon { display:none; }
-
-        .upload-zone {
+.upload-zone {
             display: flex; flex-direction: column; align-items: center;
             padding: 2.5rem 1.5rem; border-radius: 8px; cursor: pointer;
             border: 1px dashed rgba(45,102,68,0.28);
@@ -1098,24 +1076,6 @@
         });
 
         document.querySelectorAll('.fi').forEach(f => f.addEventListener('input', () => { f.style.borderColor = ''; }));
-
-        // Google Maps autocomplete (chiamato dal callback Maps API)
-        window.initMapsAutocomplete = function() {
-            const input = document.getElementById('indirizzo-autocomplete');
-            if (!input || !window.google) return;
-            const ac = new google.maps.places.Autocomplete(input, {
-                types: ['geocode'],
-                componentRestrictions: { country: 'it' },
-                fields: ['formatted_address']
-            });
-            ac.addListener('place_changed', () => {
-                const place = ac.getPlace();
-                if (place.formatted_address) {
-                    input.value = place.formatted_address;
-                    input.style.borderColor = '';
-                }
-            });
-        };
 
         // Stima di mercato toggle
         const stimaToggle = document.getElementById('stima-toggle');
