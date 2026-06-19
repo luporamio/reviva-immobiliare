@@ -704,118 +704,164 @@
     </section>
 
 
-    <!-- ═══════════ FORM QUALIFICAZIONE ═══════════ -->
+    <!-- ═══════════ FORM QUALIFICAZIONE (6 step) ═══════════ -->
     <section id="valutazione" class="form-bg py-20 md:py-32 px-6 md:px-16 lg:px-24">
-        <div class="max-w-2xl mx-auto">
+        <div class="max-w-xl mx-auto">
 
-            <div class="fi-anim mb-12">
+            <div class="fi-anim mb-10">
                 <p class="text-xs tracking-[0.25em] uppercase mb-4" style="color: rgba(74,155,111,0.7);">Valutazione gratuita</p>
-                <h2 class="font-display font-semibold text-warm leading-tight mb-4"
-                    style="font-size: clamp(2rem, 5vw, 3rem);">
-                    Analizziamo il potenziale<br>del tuo immobile.
+                <h2 class="font-display font-semibold text-warm leading-tight mb-4" style="font-size: clamp(2rem, 5vw, 3rem);">
+                    Raccontaci il tuo immobile.
                 </h2>
                 <p class="text-sm leading-relaxed" style="color: rgba(250,248,244,0.40);">
-                    Tre domande veloci per capire se possiamo fare un'offerta. Nessun impegno.
+                    Sei step veloci. Ti risponderemo entro 24 ore con una valutazione concreta.
                 </p>
             </div>
 
-            <form id="lead-form" class="fi-anim space-y-10" novalidate>
-
-                <!-- 01 Immobile -->
-                <div class="space-y-5">
-                    <p class="text-xs tracking-[0.2em] uppercase" style="color: rgba(74,155,111,0.7);">01&nbsp;&nbsp;L'immobile</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="fl">Indirizzo o zona</label>
-                            <input class="fi" type="text" name="indirizzo" placeholder="es. Via Roma 14, Ferrara" required>
-                        </div>
-                        <div>
-                            <label class="fl">Anno di costruzione approssimativo</label>
-                            <input class="fi" type="text" name="anno" placeholder="es. 1970">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="fl" style="margin-bottom:0.75rem;">Superficie</label>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2" data-group="mq">
-                            <div class="rpill" data-value="sotto_45"><span>Sotto 45 mq</span></div>
-                            <div class="rpill" data-value="45_65"><span>45 – 65 mq</span></div>
-                            <div class="rpill" data-value="65_80"><span>65 – 80 mq</span></div>
-                            <div class="rpill" data-value="oltre_80"><span>Oltre 80 mq</span></div>
-                        </div>
-                        <input type="hidden" name="mq" id="mq-val">
-                    </div>
-                    <div>
-                        <label class="fl" style="margin-bottom:0.75rem;">Stato attuale</label>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2" data-group="stato">
-                            <div class="rpill" data-value="da_ristrutturare"><span>Da ristrutturare</span></div>
-                            <div class="rpill" data-value="parzialmente"><span>Parzialmente</span></div>
-                            <div class="rpill" data-value="buono"><span>Buono stato</span></div>
-                            <div class="rpill" data-value="ristrutturato"><span>Già ristrutturato</span></div>
-                        </div>
-                        <input type="hidden" name="stato" id="stato-val">
-                    </div>
+            <!-- Progress bar -->
+            <div class="fi-anim mb-8" id="form-progress-wrap">
+                <div class="flex items-center justify-between mb-2">
+                    <span id="step-label" class="text-xs tracking-[0.2em] uppercase" style="color: rgba(74,155,111,0.8);">Chi sei</span>
+                    <span class="text-xs" style="color: rgba(250,248,244,0.25);">Step <span id="step-num">1</span> / 6</span>
                 </div>
-
-                <div class="rule"></div>
-
-                <!-- 02 Prezzo e situazione -->
-                <div class="space-y-5">
-                    <p class="text-xs tracking-[0.2em] uppercase" style="color: rgba(74,155,111,0.7);">02&nbsp;&nbsp;Prezzo e situazione</p>
-                    <div>
-                        <label class="fl" style="margin-bottom:0.75rem;">Prezzo che hai in mente</label>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2" data-group="prezzo">
-                            <div class="rpill" data-value="sotto_30"><span>Sotto 30K</span></div>
-                            <div class="rpill" data-value="30_50"><span>30 – 50K</span></div>
-                            <div class="rpill" data-value="50_70"><span>50 – 70K</span></div>
-                            <div class="rpill" data-value="oltre_70"><span>Oltre 70K</span></div>
-                        </div>
-                        <input type="hidden" name="prezzo" id="prezzo-val">
-                    </div>
-                    <div>
-                        <label class="fl" style="margin-bottom:0.75rem;">L'immobile è attualmente</label>
-                        <div class="grid grid-cols-3 gap-2" data-group="uso">
-                            <div class="rpill" data-value="abitato"><span>Abitato</span></div>
-                            <div class="rpill" data-value="affittato"><span>Affittato</span></div>
-                            <div class="rpill" data-value="sfitto"><span>Vuoto / sfitto</span></div>
-                        </div>
-                        <input type="hidden" name="uso" id="uso-val">
-                    </div>
-                    <div>
-                        <label class="fl" style="margin-bottom:0.75rem;">Urgenza di vendita</label>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2" data-group="urgenza">
-                            <div class="rpill" data-value="prima_possibile"><span>Prima possibile</span></div>
-                            <div class="rpill" data-value="6_mesi"><span>Entro 6 mesi</span></div>
-                            <div class="rpill" data-value="anno"><span>Entro l'anno</span></div>
-                            <div class="rpill" data-value="no_fretta"><span>Nessuna fretta</span></div>
-                        </div>
-                        <input type="hidden" name="urgenza" id="urgenza-val">
-                    </div>
+                <div class="w-full relative" style="height:1px; background: rgba(45,102,68,0.18);">
+                    <div id="progress-fill" style="position:absolute;left:0;top:0;height:100%;width:0%;background:#4a9b6f;transition:width 0.5s ease;"></div>
                 </div>
+            </div>
 
-                <div class="rule"></div>
+            <!-- Form multi-step -->
+            <form id="lead-form" class="fi-anim" novalidate style="overflow:hidden;">
 
-                <!-- 03 Contatto -->
-                <div class="space-y-5">
-                    <p class="text-xs tracking-[0.2em] uppercase" style="color: rgba(74,155,111,0.7);">03&nbsp;&nbsp;I tuoi contatti</p>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="fl">Nome e cognome *</label>
-                            <input class="fi" type="text" name="nome" required placeholder="Mario Rossi">
+                <!-- Step 1: Chi sei -->
+                <div class="form-step active" data-step="1">
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="fl">Nome *</label>
+                                <input class="fi" type="text" name="nome" placeholder="Mario" autocomplete="given-name">
+                            </div>
+                            <div>
+                                <label class="fl">Cognome *</label>
+                                <input class="fi" type="text" name="cognome" placeholder="Rossi" autocomplete="family-name">
+                            </div>
                         </div>
                         <div>
                             <label class="fl">Telefono *</label>
-                            <input class="fi" type="tel" name="telefono" required placeholder="+39 333 000 0000">
+                            <input class="fi" type="tel" name="telefono" placeholder="+39 333 000 0000" autocomplete="tel">
+                        </div>
+                        <div>
+                            <label class="fl">Email</label>
+                            <input class="fi" type="email" name="email" placeholder="mario@email.it" autocomplete="email">
                         </div>
                     </div>
                 </div>
 
-                <div class="pt-2">
-                    <button type="submit" class="btn-primary w-full py-4 text-center">
-                        Invia e scopri se possiamo fare un'offerta
-                    </button>
-                    <p class="text-center mt-3 text-xs" style="color: rgba(250,248,244,0.20);">
-                        Risposta entro 24 ore. Nessun impegno, nessuna commissione.
-                    </p>
+                <!-- Step 2: Motivo vendita -->
+                <div class="form-step" data-step="2" style="display:none;">
+                    <p class="text-sm mb-5" style="color: rgba(250,248,244,0.45);">Perché stai pensando di vendere?</p>
+                    <div class="space-y-2" data-group="motivo">
+                        <div class="rpill rpill-lg" data-value="cambio_casa"><span>Cambio casa o mi trasferisco</span></div>
+                        <div class="rpill rpill-lg" data-value="liquidita"><span>Ho bisogno di liquidità</span></div>
+                        <div class="rpill rpill-lg" data-value="eredita"><span>Eredità o divisione tra eredi</span></div>
+                        <div class="rpill rpill-lg" data-value="non_uso"><span>Non lo uso più</span></div>
+                        <div class="rpill rpill-lg" data-value="altro"><span>Altro motivo</span></div>
+                    </div>
+                    <input type="hidden" name="motivo" id="motivo-val">
+                </div>
+
+                <!-- Step 3: Urgenza -->
+                <div class="form-step" data-step="3" style="display:none;">
+                    <p class="text-sm mb-5" style="color: rgba(250,248,244,0.45);">Con che urgenza vorresti vendere?</p>
+                    <div class="space-y-2" data-group="urgenza">
+                        <div class="rpill rpill-lg" data-value="prima_possibile"><span>Prima possibile, entro 3 mesi</span></div>
+                        <div class="rpill rpill-lg" data-value="6_mesi"><span>Entro 6 mesi</span></div>
+                        <div class="rpill rpill-lg" data-value="anno"><span>Entro l'anno</span></div>
+                        <div class="rpill rpill-lg" data-value="no_fretta"><span>Nessuna fretta, ma valuto proposte</span></div>
+                    </div>
+                    <input type="hidden" name="urgenza" id="urgenza-val">
+                </div>
+
+                <!-- Step 4: L'immobile -->
+                <div class="form-step" data-step="4" style="display:none;">
+                    <div class="space-y-5">
+                        <div>
+                            <label class="fl">Indirizzo o zona *</label>
+                            <input class="fi" type="text" name="indirizzo" placeholder="es. Via Roma 14, Ferrara">
+                        </div>
+                        <div>
+                            <label class="fl" style="margin-bottom:0.75rem;">Superficie</label>
+                            <div class="grid grid-cols-2 gap-2" data-group="mq">
+                                <div class="rpill" data-value="sotto_45"><span>Sotto 45 mq</span></div>
+                                <div class="rpill" data-value="45_65"><span>45 – 65 mq</span></div>
+                                <div class="rpill" data-value="65_80"><span>65 – 80 mq</span></div>
+                                <div class="rpill" data-value="oltre_80"><span>Oltre 80 mq</span></div>
+                            </div>
+                            <input type="hidden" name="mq" id="mq-val">
+                        </div>
+                        <div>
+                            <label class="fl" style="margin-bottom:0.75rem;">Stato attuale</label>
+                            <div class="grid grid-cols-2 gap-2" data-group="stato">
+                                <div class="rpill" data-value="da_ristrutturare"><span>Da ristrutturare</span></div>
+                                <div class="rpill" data-value="parzialmente"><span>Parzialmente</span></div>
+                                <div class="rpill" data-value="buono"><span>Buono stato</span></div>
+                                <div class="rpill" data-value="ristrutturato"><span>Già ristrutturato</span></div>
+                            </div>
+                            <input type="hidden" name="stato" id="stato-val">
+                        </div>
+                        <div>
+                            <label class="fl" style="margin-bottom:0.75rem;">Prezzo richiesto</label>
+                            <div class="grid grid-cols-2 gap-2" data-group="prezzo">
+                                <div class="rpill" data-value="sotto_30"><span>Sotto 30K</span></div>
+                                <div class="rpill" data-value="30_50"><span>30 – 50K</span></div>
+                                <div class="rpill" data-value="50_70"><span>50 – 70K</span></div>
+                                <div class="rpill" data-value="oltre_70"><span>Oltre 70K</span></div>
+                            </div>
+                            <input type="hidden" name="prezzo" id="prezzo-val">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Foto -->
+                <div class="form-step" data-step="5" style="display:none;">
+                    <div class="space-y-5">
+                        <p class="text-sm leading-relaxed" style="color: rgba(250,248,244,0.45);">
+                            Aggiungi foto dell'immobile. Ci aiuta a capire lo stato attuale. Facoltativo.
+                        </p>
+                        <label for="foto-input" class="upload-zone">
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(74,155,111,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            <p class="text-sm mb-1" style="color: rgba(250,248,244,0.55);">Clicca per aggiungere foto</p>
+                            <p class="text-xs" style="color: rgba(250,248,244,0.22);">JPG, PNG. Fino a 6 immagini. Facoltativo.</p>
+                            <input id="foto-input" type="file" name="foto" accept="image/*" multiple class="sr-only">
+                        </label>
+                        <div id="foto-preview" class="foto-grid"></div>
+                    </div>
+                </div>
+
+                <!-- Step 6: Planimetria -->
+                <div class="form-step" data-step="6" style="display:none;">
+                    <div class="space-y-5">
+                        <p class="text-sm leading-relaxed" style="color: rgba(250,248,244,0.45);">
+                            Hai la planimetria dell'appartamento? Allegala qui. Facoltativo.
+                        </p>
+                        <label for="planimetria-input" class="upload-zone">
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(74,155,111,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            <p class="text-sm mb-1" style="color: rgba(250,248,244,0.55);">Clicca per allegare la planimetria</p>
+                            <p class="text-xs" style="color: rgba(250,248,244,0.22);">PDF o immagine. Facoltativo.</p>
+                            <input id="planimetria-input" type="file" name="planimetria" accept="image/*,.pdf" class="sr-only">
+                        </label>
+                        <div id="planimetria-info" class="plan-file-info" style="display:none;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(74,155,111,0.8)" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            <span id="planimetria-filename" class="text-sm" style="color: rgba(250,248,244,0.55);"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex items-center mt-10 gap-4">
+                    <button type="button" id="btn-prev" class="btn-outline py-3 px-6 text-sm" style="display:none;">Indietro</button>
+                    <div style="flex:1;"></div>
+                    <button type="button" id="btn-next" class="btn-primary py-3 px-8 text-sm">Avanti</button>
+                    <button type="submit" id="btn-submit" class="btn-primary py-3 px-8 text-sm" style="display:none;">Invia la valutazione</button>
                 </div>
 
             </form>
@@ -826,10 +872,14 @@
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(74,155,111,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
                 <p class="font-display text-warm font-semibold mb-3" style="font-size: clamp(1.6rem, 4vw, 2.4rem);">Ottimo. Rientra nei parametri.</p>
-                <p class="text-sm leading-relaxed max-w-sm mx-auto mb-8" style="color: rgba(250,248,244,0.40);">
+                <p class="text-sm leading-relaxed max-w-sm mx-auto mb-3" style="color: rgba(250,248,244,0.40);">
                     Scrivi su WhatsApp con una foto dell'immobile. Ti rispondo in giornata con una valutazione indicativa.
                 </p>
-                <a href="https://wa.me/393495531209?text=Ciao%20Reviva%2C%20ho%20compilato%20il%20modulo%20e%20vorrei%20una%20valutazione%20per%20il%20mio%20appartamento."
+                <p id="result-attach-note" class="text-xs mb-8" style="color: rgba(250,248,244,0.22); display:none;">
+                    Includi nel messaggio WhatsApp le foto e la planimetria che hai allegato.
+                </p>
+                <a id="wa-result-link"
+                   href="https://wa.me/393495531209?text=Ciao%20Reviva%2C%20ho%20compilato%20il%20modulo%20e%20vorrei%20una%20valutazione."
                    target="_blank" rel="noopener"
                    class="btn-primary inline-flex items-center gap-3 text-base px-8 py-4">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -900,6 +950,26 @@
     <style>
         #wa-float.wa-visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
         #wa-float:hover { background: #4a9b6f !important; transform: scale(1.08) !important; }
+
+        /* Multi-step form */
+        .form-step { position: relative; }
+        .rpill-lg { width:100%; padding: 0.85rem 1.25rem; text-align:left; justify-content:flex-start; }
+        .upload-zone {
+            display: flex; flex-direction: column; align-items: center;
+            padding: 2.5rem 1.5rem; border-radius: 8px; cursor: pointer;
+            border: 1px dashed rgba(45,102,68,0.28);
+            background: rgba(45,102,68,0.04);
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .upload-zone:hover { border-color: rgba(74,155,111,0.45); background: rgba(45,102,68,0.08); }
+        .foto-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:8px; margin-top:4px; }
+        .foto-thumb { aspect-ratio:1; border-radius:6px; overflow:hidden; border:1px solid rgba(45,102,68,0.2); }
+        .foto-thumb img { width:100%; height:100%; object-fit:cover; }
+        .plan-file-info {
+            display:flex; align-items:center; gap:0.75rem;
+            padding: 0.7rem 1rem; border-radius:6px;
+            background: rgba(45,102,68,0.12); border:1px solid rgba(45,102,68,0.2);
+        }
     </style>
 
     <script>
@@ -931,35 +1001,127 @@
             });
         });
 
-        // Form: qualificazione lead
+        // ── Multi-step form ──────────────────────────────────────────
+        const STEP_LABELS = ['Chi sei', 'Perché vendi', 'Urgenza', "L'immobile", 'Foto', 'Planimetria'];
+        const TOTAL_STEPS = 6;
+        let currentStep = 1;
+
+        function updateFormUI() {
+            document.getElementById('step-label').textContent = STEP_LABELS[currentStep - 1];
+            document.getElementById('step-num').textContent = currentStep;
+            const pct = ((currentStep - 1) / (TOTAL_STEPS - 1)) * 100;
+            document.getElementById('progress-fill').style.width = pct + '%';
+            document.getElementById('btn-prev').style.display  = currentStep === 1 ? 'none' : 'inline-flex';
+            document.getElementById('btn-next').style.display  = currentStep === TOTAL_STEPS ? 'none' : 'inline-flex';
+            document.getElementById('btn-submit').style.display = currentStep === TOTAL_STEPS ? 'inline-flex' : 'none';
+        }
+
+        function validateStep(step) {
+            if (step === 1) {
+                const nome    = document.querySelector('[name="nome"]').value.trim();
+                const cognome = document.querySelector('[name="cognome"]').value.trim();
+                const tel     = document.querySelector('[name="telefono"]').value.trim();
+                let ok = true;
+                [['nome', nome], ['cognome', cognome], ['telefono', tel]].forEach(([n, v]) => {
+                    const el = document.querySelector(`[name="${n}"]`);
+                    if (!v) { el.style.borderColor = 'rgba(200,80,60,0.6)'; ok = false; }
+                });
+                return ok;
+            }
+            if (step === 4) {
+                const ind = document.querySelector('[name="indirizzo"]').value.trim();
+                if (!ind) { document.querySelector('[name="indirizzo"]').style.borderColor = 'rgba(200,80,60,0.6)'; return false; }
+            }
+            return true;
+        }
+
+        function goToStep(next, dir) {
+            const cur    = document.querySelector('.form-step.active');
+            const target = document.querySelector(`.form-step[data-step="${next}"]`);
+            const outX = dir === 'fwd' ? -40 : 40;
+            const inX  = dir === 'fwd' ?  40 : -40;
+            gsap.to(cur, { opacity:0, x:outX, duration:0.22, ease:'power2.in', onComplete:() => {
+                cur.classList.remove('active'); cur.style.display = 'none';
+                target.style.display = 'block'; target.classList.add('active');
+                currentStep = next; updateFormUI();
+                gsap.fromTo(target, { opacity:0, x:inX }, { opacity:1, x:0, duration:0.28, ease:'power2.out' });
+            }});
+        }
+
+        document.getElementById('btn-next').addEventListener('click', () => {
+            if (!validateStep(currentStep)) return;
+            if (currentStep < TOTAL_STEPS) goToStep(currentStep + 1, 'fwd');
+        });
+        document.getElementById('btn-prev').addEventListener('click', () => {
+            if (currentStep > 1) goToStep(currentStep - 1, 'bwd');
+        });
+
+        document.querySelectorAll('.fi').forEach(f => f.addEventListener('input', () => { f.style.borderColor = ''; }));
+
+        // Foto preview
+        document.getElementById('foto-input').addEventListener('change', function() {
+            const grid = document.getElementById('foto-preview');
+            grid.innerHTML = '';
+            Array.from(this.files).slice(0, 6).forEach(file => {
+                if (!file.type.startsWith('image/')) return;
+                const r = new FileReader();
+                r.onload = e => {
+                    const d = document.createElement('div'); d.className = 'foto-thumb';
+                    d.innerHTML = `<img src="${e.target.result}" alt="${file.name}">`;
+                    grid.appendChild(d);
+                };
+                r.readAsDataURL(file);
+            });
+        });
+
+        // Planimetria filename
+        document.getElementById('planimetria-input').addEventListener('change', function() {
+            const info = document.getElementById('planimetria-info');
+            if (this.files[0]) {
+                document.getElementById('planimetria-filename').textContent = this.files[0].name;
+                info.style.display = 'flex';
+            } else { info.style.display = 'none'; }
+        });
+
+        // Submit con qualificazione
         document.getElementById('lead-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const nome     = this.querySelector('[name="nome"]').value.trim();
-            const telefono = this.querySelector('[name="telefono"]').value.trim();
-            const stato    = document.getElementById('stato-val').value;
-            const mq       = document.getElementById('mq-val').value;
-            const prezzo   = document.getElementById('prezzo-val').value;
+            const nome      = this.querySelector('[name="nome"]').value.trim();
+            const cognome   = this.querySelector('[name="cognome"]').value.trim();
+            const telefono  = this.querySelector('[name="telefono"]').value.trim();
+            const indirizzo = this.querySelector('[name="indirizzo"]').value.trim();
+            const stato     = document.getElementById('stato-val').value;
+            const mq        = document.getElementById('mq-val').value;
+            const prezzo    = document.getElementById('prezzo-val').value;
+            const motivo    = document.getElementById('motivo-val').value;
+            const urgenza   = document.getElementById('urgenza-val').value;
+            const hasFoto   = document.getElementById('foto-input').files.length > 0;
+            const hasPlan   = document.getElementById('planimetria-input').files.length > 0;
 
-            if (!nome || !telefono) {
-                alert('Inserisci nome e numero di telefono per continuare.');
-                return;
-            }
+            const nonQualificato = stato === 'ristrutturato' || mq === 'oltre_80' || prezzo === 'oltre_70';
 
-            // Criteri di esclusione
-            const nonQualificato =
-                stato === 'ristrutturato' ||
-                mq === 'oltre_80' ||
-                prezzo === 'oltre_70';
-
+            document.getElementById('form-progress-wrap').style.display = 'none';
             this.style.display = 'none';
-            const esito = document.getElementById(nonQualificato ? 'result-no' : 'result-yes');
-            esito.style.display = 'block';
-            esito.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-            console.log('[Reviva Lead]', {
-                nome, telefono, stato, mq, prezzo,
-                qualificato: !nonQualificato
-            });
+            if (nonQualificato) {
+                document.getElementById('result-no').style.display = 'block';
+                document.getElementById('result-no').scrollIntoView({ behavior:'smooth', block:'center' });
+            } else {
+                const mqMap = { sotto_45:'sotto 45mq', '45_65':'45-65mq', '65_80':'65-80mq', oltre_80:'oltre 80mq' };
+                const stMap = { da_ristrutturare:'da ristrutturare', parzialmente:'parzialmente da ristrutturare', buono:'buono stato', ristrutturato:'già ristrutturato' };
+                const prMap = { sotto_30:'sotto 30K', '30_50':'30-50K', '50_70':'50-70K', oltre_70:'oltre 70K' };
+                let msg = `Ciao Reviva, mi chiamo ${nome} ${cognome} (tel. ${telefono}).`;
+                if (indirizzo) msg += ` Immobile: ${indirizzo}.`;
+                if (mq) msg += ` Superficie: ${mqMap[mq]||mq}.`;
+                if (stato) msg += ` Stato: ${stMap[stato]||stato}.`;
+                if (prezzo) msg += ` Prezzo richiesto: ${prMap[prezzo]||prezzo}.`;
+                if (hasFoto||hasPlan) msg += ' Allego foto e planimetria nel prossimo messaggio.';
+                document.getElementById('wa-result-link').href = 'https://wa.me/393495531209?text=' + encodeURIComponent(msg);
+                if (hasFoto||hasPlan) document.getElementById('result-attach-note').style.display = 'block';
+                document.getElementById('result-yes').style.display = 'block';
+                document.getElementById('result-yes').scrollIntoView({ behavior:'smooth', block:'center' });
+            }
+            console.log('[Reviva Lead]', { nome, cognome, telefono, indirizzo, stato, mq, prezzo, motivo, urgenza, qualificato:!nonQualificato, hasFoto, hasPlan });
         });
 
         // Floating button: mostra dopo 300px di scroll
