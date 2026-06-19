@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviva Immobiliare — Brand Kit v1.0</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --forest:    #0c1a11;
+            --forest-2:  #162a1e;
+            --green:     #2d6644;
+            --green-mid: #4a9b6f;
+            --cream:     #f5f0e8;
+            --warm:      #faf8f4;
+            --ink:       #1a1a16;
+            --muted:     #6b7970;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f0ede6;
+            color: var(--ink);
+        }
+
+        .page {
+            max-width: 960px;
+            margin: 48px auto;
+            background: #faf8f4;
+            box-shadow: 0 4px 40px rgba(12,26,17,0.12);
+        }
+
+        /* ── Sezioni ── */
+        .sec {
+            padding: 56px 64px;
+            border-bottom: 1px solid rgba(26,26,22,0.06);
+        }
+        .sec:last-child { border-bottom: none; }
+
+        .sec-label {
+            font-size: 0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .sec-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(26,26,22,0.08);
+        }
+
+        /* ── Logotipo ── */
+        .logotype {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ── Swatches ── */
+        .swatch-grid {
+            display: grid;
+            gap: 12px;
+        }
+        .swatch-block {
+            border-radius: 2px;
+            display: flex;
+            flex-direction: column;
+        }
+        .swatch-color {
+            border-radius: 2px 2px 0 0;
+            flex: 1;
+        }
+        .swatch-info {
+            padding: 10px 12px;
+            background: white;
+            border: 1px solid rgba(26,26,22,0.06);
+            border-top: none;
+            border-radius: 0 0 2px 2px;
+        }
+        .swatch-name { font-size: 0.72rem; font-weight: 500; color: var(--ink); }
+        .swatch-hex  { font-family: monospace; font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+        .swatch-use  { font-size: 0.58rem; color: rgba(107,121,112,0.7); margin-top: 3px; }
+
+        /* ── Typography ── */
+        .type-spec {
+            border-left: 2px solid var(--green);
+            padding: 0 0 0 18px;
+        }
+
+        /* ── Monogramma ── */
+        .mono-wrap { text-align: center; }
+        .mono-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+        }
+
+        /* ── Regole uso ── */
+        .do-dont-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .rule-card {
+            border-radius: 2px;
+            padding: 20px;
+        }
+        .rule-ok   { border: 1px solid rgba(45,102,68,0.25); background: rgba(45,102,68,0.04); }
+        .rule-no   { border: 1px solid rgba(200,60,60,0.2); background: rgba(200,60,60,0.03); }
+        .rule-tag  { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
+        .rule-ok .rule-tag { color: var(--green); }
+        .rule-no .rule-tag { color: rgba(180,50,50,0.7); }
+        .rule-text { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+
+        @media print {
+            body { background: white; }
+            .page { margin: 0; box-shadow: none; max-width: 100%; }
+            .sec { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+
+<body>
+<div class="page">
+
+    <!-- ══════════ COVER ══════════ -->
+    <div style="background: var(--forest); padding: 80px 64px 72px; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between;">
+
+        <!-- Noise texture overlay -->
+        <div style="position: absolute; inset: 0; opacity: 0.03; pointer-events: none;
+             background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22/%3E%3C/filter%3E%3Crect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22/%3E%3C/svg%3E');"></div>
+
+        <div>
+            <span class="logotype" style="font-size: 3rem; color: var(--warm); display: block; margin-bottom: 6px;">Reviva</span>
+            <span style="font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(250,248,244,0.28);">Immobiliare</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 60px;">
+            <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: rgba(250,248,244,0.30); font-style: italic; font-weight: 400; line-height: 1.2;">
+                Brand Identity<br>Guidelines
+            </p>
+            <div style="text-align: right;">
+                <p style="font-size: 0.62rem; color: rgba(250,248,244,0.18); letter-spacing: 0.1em; margin-bottom: 4px;">Versione 1.0</p>
+                <p style="font-size: 0.62rem; color: rgba(250,248,244,0.18); letter-spacing: 0.1em;">Giugno 2026</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ 01 — LOGOTIPO ══════════ -->
+    <div class="sec">
+        <p class="sec-label">01 &nbsp;&middot;&nbsp; Logotipo</p>
+
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; color: var(--ink); margin-bottom: 6px;">
+            Il logotipo è il word mark REVIVA.
+        </p>
+        <p style="font-size: 0.8rem; color: var(--muted); line-height: 1.65; max-width: 520px; margin-bottom: 36px;">
+            Cormorant Garamond SemiBold, tracking 0.18em, uppercase. Non modificare
+            proporzioni, spaziatura o peso del carattere. Usare esclusivamente
+            nelle varianti approvate indicate di seguito.
+        </p>
+
+        <!-- Varianti primarie -->
+        <p style="font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px;">Varianti principali</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+
+            <div>
+                <div class="logo-box" style="height: 130px; background: var(--forest);">
+                    <span class="logotype" style="font-size: 2.4rem; color: var(--warm);">Reviva</span>
+                </div>
+                <p style="font-size: 0.6rem; color: var(--muted); margin-top: 8px; letter-spacing: 0.06em;">PRIMARIO &nbsp;&middot;&nbsp; bianco su Foresta #0c1a11</p>
+            </div>
+
+            <div>
+                <div class="logo-box" style="height: 130px; background: var(--cream); border: 1px solid rgba(26,26,22,0.06);">
+                    <span class="logotype" style="font-size: 2.4rem; color: var(--ink);">Reviva</span>
+                </div>
+                <p style="font-size: 0.6rem; color: var(--muted); margin-top: 8px; letter-spacing: 0.06em;">SECONDARIO &nbsp;&middot;&nbsp; scuro su Crema #f5f0e8</p>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 36px;">
+
+            <div>
+                <div class="logo-box" style="height: 100px; background: var(--green);">
+                    <span class="logotype" style="font-size: 1.9rem; color: var(--warm);">Reviva</span>
+                </div>
+                <p style="font-size: 0.6rem; color: var(--muted); margin-top: 8px; letter-spacing: 0.06em;">su Verde Brand #2d6644</p>
+            </div>
+
+            <div>
+                <div class="logo-box" style="height: 100px; background: var(--warm); border: 1px solid rgba(26,26,22,0.06);">
+                    <span class="logotype" style="font-size: 1.9rem; color: var(--ink);">Reviva</span>
+                </div>
+                <p style="font-size: 0.6rem; color: var(--muted); margin-top: 8px; letter-spacing: 0.06em;">MONO SCURO &nbsp;&middot;&nbsp; su bianco caldo</p>
+            </div>
+
+            <div>
+                <div class="logo-box" style="height: 100px; background: var(--ink);">
+                    <span class="logotype" style="font-size: 1.9rem; color: var(--warm);">Reviva</span>
+                </div>
+                <p style="font-size: 0.6rem; color: var(--muted); margin-top: 8px; letter-spacing: 0.06em;">MONO CHIARO &nbsp;&middot;&nbsp; su inchiostro</p>
+            </div>
+        </div>
+
+        <!-- Varianti con claim -->
+        <p style="font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px;">Varianti con claim e descriptor</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+
+            <div>
+                <div class="logo-box" style="height: 120px; background: var(--forest); flex-direction: column; gap: 8px;">
+                    <span class="logotype" style="font-size: 2rem; color: var(--warm);">Reviva</span>
+                    <span style="font-size: 0.58rem; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(250,248,244,0.30);">Immobiliare</span>
+                </div>
+                <p style="font-size: 0.6rem; color: var(--muted); margin-top: 8px; letter-spacing: 0.06em;">con descriptor "Immobiliare"</p>
+            </div>
+
+            <div>
+                <div class="logo-box" style="height: 120px; background: var(--forest); flex-direction: column; gap: 10px; padding: 0 32px;">
+                    <span class="logotype" style="font-size: 2rem; color: var(--warm);">Reviva</span>
+                    <div style="width: 100%; height: 1px; background: rgba(250,248,244,0.12);"></div>
+                    <span style="font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: rgba(250,248,244,0.38); font-style: italic; text-align: center;">Vendi casa senza agenzia.</span>
+                </div>
+                <p style="font-size: 0.6rem; color: var(--muted); margin-top: 8px; letter-spacing: 0.06em;">con claim payoff</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ 02 — PALETTE ══════════ -->
+    <div class="sec">
+        <p class="sec-label">02 &nbsp;&middot;&nbsp; Palette colori</p>
+
+        <!-- Primari -->
+        <p style="font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px;">Primari</p>
+        <div class="swatch-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 20px;">
+
+            <div class="swatch-block">
+                <div class="swatch-color" style="height: 110px; background: #0c1a11;"></div>
+                <div class="swatch-info">
+                    <p class="swatch-name">Foresta</p>
+                    <p class="swatch-hex">#0c1a11</p>
+                    <p class="swatch-use">Sfondi hero, footer, nav</p>
+                </div>
+            </div>
+
+            <div class="swatch-block">
+                <div class="swatch-color" style="height: 110px; background: #2d6644;"></div>
+                <div class="swatch-info">
+                    <p class="swatch-name">Verde Reviva</p>
+                    <p class="swatch-hex">#2d6644</p>
+                    <p class="swatch-use">Colore brand principale</p>
+                </div>
+            </div>
+
+            <div class="swatch-block">
+                <div class="swatch-color" style="height: 110px; background: #4a9b6f;"></div>
+                <div class="swatch-info">
+                    <p class="swatch-name">Salvia</p>
+                    <p class="swatch-hex">#4a9b6f</p>
+                    <p class="swatch-use">Accenti, hover, label</p>
+                </div>
+            </div>
+
+            <div class="swatch-block">
+                <div class="swatch-color" style="height: 110px; background: #1a1a16;"></div>
+                <div class="swatch-info">
+                    <p class="swatch-name">Inchiostro</p>
+                    <p class="swatch-hex">#1a1a16</p>
+                    <p class="swatch-use">Testo su sfondi chiari</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Secondari -->
+        <p style="font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px;">Secondari e neutri</p>
+        <div class="swatch-grid" style="grid-template-columns: repeat(4, 1fr);">
+
+            <div class="swatch-block">
+                <div class="swatch-color" style="height: 80px; background: #f5f0e8; border: 1px solid rgba(26,26,22,0.06); border-bottom: none; border-radius: 2px 2px 0 0;"></div>
+                <div class="swatch-info">
+                    <p class="swatch-name">Crema</p>
+                    <p class="swatch-hex">#f5f0e8</p>
+                    <p class="swatch-use">Sezioni alternate chiare</p>
+                </div>
+            </div>
+
+            <div class="swatch-block">
+                <div class="swatch-color" style="height: 80px; background: #faf8f4; border: 1px solid rgba(26,26,22,0.06); border-bottom: none; border-radius: 2px 2px 0 0;"></div>
+                <div class="swatch-info">
+                    <p class="swatch-name">Bianco Caldo</p>
+                    <p class="swatch-hex">#faf8f4</p>
+                    <p class="swatch-use">Sfondi contenuto primari</p>
+                </div>
+            </div>
+
+            <div class="swatch-block">
+                <div class="swatch-color" style="height: 80px; background: #6b7970;"></div>
+                <div class="swatch-info">
+                    <p class="swatch-name">Grafite</p>
+                    <p class="swatch-hex">#6b7970</p>
+                    <p class="swatch-use">Testo secondario, muted</p>
+                </div>
+            </div>
+
+            <div class="swatch-block">
+                <div class="swatch-color" style="height: 80px; background: #162a1e;"></div>
+                <div class="swatch-info">
+                    <p class="swatch-name">Foresta Scura</p>
+                    <p class="swatch-hex">#162a1e</p>
+                    <p class="swatch-use">Form, sezioni accent dark</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Combinazioni approvate -->
+        <div style="margin-top: 36px;">
+            <p style="font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px;">Combinazioni testo/sfondo approvate</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div style="background: #0c1a11; padding: 10px 16px; border-radius: 2px; display: flex; flex-direction: column; gap: 4px;">
+                    <span class="logotype" style="font-size: 0.9rem; color: #faf8f4;">Reviva</span>
+                    <span style="font-size: 0.58rem; color: rgba(250,248,244,0.35); letter-spacing: 0.06em;">bianco su foresta</span>
+                </div>
+                <div style="background: #2d6644; padding: 10px 16px; border-radius: 2px; display: flex; flex-direction: column; gap: 4px;">
+                    <span class="logotype" style="font-size: 0.9rem; color: #faf8f4;">Reviva</span>
+                    <span style="font-size: 0.58rem; color: rgba(250,248,244,0.4); letter-spacing: 0.06em;">bianco su verde</span>
+                </div>
+                <div style="background: #f5f0e8; padding: 10px 16px; border-radius: 2px; border: 1px solid rgba(26,26,22,0.06); display: flex; flex-direction: column; gap: 4px;">
+                    <span class="logotype" style="font-size: 0.9rem; color: #1a1a16;">Reviva</span>
+                    <span style="font-size: 0.58rem; color: #6b7970; letter-spacing: 0.06em;">scuro su crema</span>
+                </div>
+                <div style="background: #faf8f4; padding: 10px 16px; border-radius: 2px; border: 1px solid rgba(26,26,22,0.06); display: flex; flex-direction: column; gap: 4px;">
+                    <span class="logotype" style="font-size: 0.9rem; color: #1a1a16;">Reviva</span>
+                    <span style="font-size: 0.58rem; color: #6b7970; letter-spacing: 0.06em;">scuro su bianco caldo</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ 03 — TIPOGRAFIA ══════════ -->
+    <div class="sec">
+        <p class="sec-label">03 &nbsp;&middot;&nbsp; Tipografia</p>
+
+        <!-- Font display -->
+        <div style="margin-bottom: 48px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
+                <div>
+                    <p style="font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px;">Display / Titoli</p>
+                    <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--ink); font-weight: 500;">Cormorant Garamond</p>
+                </div>
+                <span style="font-size: 0.62rem; color: rgba(107,121,112,0.6); letter-spacing: 0.06em;">Google Fonts &middot; Free</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                <div class="type-spec">
+                    <p style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600; color: var(--ink); line-height: 1; margin-bottom: 10px;">Aa Bb Cc</p>
+                    <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 6px;">0 1 2 3 4 5 6 7 8 9</p>
+                    <p style="font-size: 0.62rem; color: var(--muted); letter-spacing: 0.06em;">SemiBold 600 &nbsp;&middot;&nbsp; Hero, H1, H2</p>
+                </div>
+                <div class="type-spec" style="border-color: rgba(45,102,68,0.3);">
+                    <p style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 400; font-style: italic; color: var(--muted); line-height: 1; margin-bottom: 10px;">Aa Bb Cc</p>
+                    <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--muted); margin-bottom: 6px;">0 1 2 3 4 5 6 7 8 9</p>
+                    <p style="font-size: 0.62rem; color: var(--muted); letter-spacing: 0.06em;">Regular Italic &nbsp;&middot;&nbsp; Claim, sottotitoli</p>
+                </div>
+            </div>
+
+            <!-- Scala tipografica display -->
+            <div style="background: var(--forest); padding: 28px 32px; border-radius: 2px;">
+                <p style="font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 600; color: var(--warm); line-height: 1.05; margin-bottom: 8px;">
+                    Vendi casa<br>senza agenzia.
+                </p>
+                <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; font-style: italic; color: rgba(250,248,244,0.35);">
+                    Analizziamo il potenziale, definiamo l'accordo.
+                </p>
+            </div>
+        </div>
+
+        <!-- Font body -->
+        <div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
+                <div>
+                    <p style="font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px;">Body / Interfaccia</p>
+                    <p style="font-size: 1.05rem; color: var(--ink); font-weight: 500;">DM Sans</p>
+                </div>
+                <span style="font-size: 0.62rem; color: rgba(107,121,112,0.6); letter-spacing: 0.06em;">Google Fonts &middot; Free</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                <div class="type-spec">
+                    <p style="font-size: 2rem; font-weight: 400; color: var(--ink); margin-bottom: 10px;">Aa Bb Cc 0123</p>
+                    <p style="font-size: 0.62rem; color: var(--muted); letter-spacing: 0.06em;">Regular 400 &nbsp;&middot;&nbsp; Corpo testo, descrizioni</p>
+                </div>
+                <div class="type-spec" style="border-color: rgba(45,102,68,0.3);">
+                    <p style="font-size: 2rem; font-weight: 600; color: var(--ink); margin-bottom: 10px;">Aa Bb Cc 0123</p>
+                    <p style="font-size: 0.62rem; color: var(--muted); letter-spacing: 0.06em;">SemiBold 600 &nbsp;&middot;&nbsp; CTA, label, UI</p>
+                </div>
+            </div>
+
+            <!-- Scala UI -->
+            <div style="border: 1px solid rgba(26,26,22,0.06); border-radius: 2px; padding: 24px 28px; background: var(--warm); display: flex; flex-direction: column; gap: 10px;">
+                <p style="font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: #4a9b6f;">01 &nbsp;&middot;&nbsp; Valutazione gratuita</p>
+                <p style="font-size: 1rem; color: var(--ink); font-weight: 500;">Analizziamo il potenziale del tuo immobile.</p>
+                <p style="font-size: 0.82rem; color: var(--muted); line-height: 1.6;">Compila il modulo. Ti rispondiamo entro 24 ore con una valutazione indicativa, senza impegno da parte tua.</p>
+                <div style="margin-top: 6px;">
+                    <button style="background: #2d6644; color: #faf8f4; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 20px; border: none; border-radius: 2px; cursor: default;">Richiedi la valutazione</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ 04 — ELEMENTI GRAFICI ══════════ -->
+    <div class="sec">
+        <p class="sec-label">04 &nbsp;&middot;&nbsp; Elementi grafici</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+
+            <!-- Bottoni -->
+            <div>
+                <p style="font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px;">Bottoni</p>
+                <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+                    <button style="background: #2d6644; color: #faf8f4; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 22px; border: none; border-radius: 2px; cursor: default;">
+                        Valutazione gratuita
+                    </button>
+                    <button style="border: 1px solid rgba(26,26,22,0.20); color: rgba(26,26,22,0.55); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 22px; background: transparent; border-radius: 2px; cursor: default;">
+                        Scopri come funziona
+                    </button>
+                    <button style="background: #2d6644; color: #faf8f4; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 22px; border: none; border-radius: 2px; cursor: default; opacity: 0.45;">
+                        Stato: disabilitato
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pill / Tag -->
+            <div>
+                <p style="font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px;">Pill — Valori brand</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span style="border: 1px solid rgba(45,102,68,0.25); border-radius: 100px; padding: 5px 14px; font-size: 0.72rem; color: #2d6644;">Semplicità</span>
+                    <span style="border: 1px solid rgba(45,102,68,0.25); border-radius: 100px; padding: 5px 14px; font-size: 0.72rem; color: #2d6644;">Concretezza</span>
+                    <span style="border: 1px solid rgba(45,102,68,0.25); border-radius: 100px; padding: 5px 14px; font-size: 0.72rem; color: #2d6644;">Rapidità</span>
+                    <span style="border: 1px solid rgba(45,102,68,0.25); border-radius: 100px; padding: 5px 14px; font-size: 0.72rem; color: #2d6644;">Trasparenza</span>
+                    <span style="border: 1px solid rgba(45,102,68,0.25); border-radius: 100px; padding: 5px 14px; font-size: 0.72rem; color: #2d6644;">Rigenerazione</span>
+                    <span style="border: 1px solid rgba(45,102,68,0.25); border-radius: 100px; padding: 5px 14px; font-size: 0.72rem; color: #2d6644;">Creazione di valore</span>
+                </div>
+            </div>
+
+            <!-- Divisori -->
+            <div>
+                <p style="font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px;">Divisori e accenti</p>
+                <div style="display: flex; flex-direction: column; gap: 18px;">
+                    <div>
+                        <div style="height: 1px; background: linear-gradient(90deg, #2d6644, rgba(45,102,68,0.15)); margin-bottom: 6px;"></div>
+                        <p style="font-size: 0.6rem; color: rgba(107,121,112,0.6);">Divisore gradient — sezioni dark/form</p>
+                    </div>
+                    <div>
+                        <div style="height: 1px; background: linear-gradient(90deg, transparent, rgba(26,26,22,0.10), transparent); margin-bottom: 6px;"></div>
+                        <p style="font-size: 0.6rem; color: rgba(107,121,112,0.6);">Divisore neutro — sezioni chiare</p>
+                    </div>
+                    <div>
+                        <div style="width: 32px; height: 2px; background: #2d6644; border-radius: 1px; margin-bottom: 6px;"></div>
+                        <p style="font-size: 0.6rem; color: rgba(107,121,112,0.6);">Accento card — intestazione sezione</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Label pattern -->
+            <div>
+                <p style="font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px;">Pattern label sezione</p>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="background: var(--forest); padding: 14px 16px; border-radius: 2px;">
+                        <p style="font-size: 0.6rem; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(74,155,111,0.7);">01 &nbsp;&middot;&nbsp; Il processo</p>
+                        <p style="font-size: 0.58rem; color: rgba(250,248,244,0.25); margin-top: 4px;">label su sfondo scuro</p>
+                    </div>
+                    <div style="background: var(--warm); padding: 14px 16px; border-radius: 2px; border: 1px solid rgba(26,26,22,0.06);">
+                        <p style="font-size: 0.6rem; letter-spacing: 0.24em; text-transform: uppercase; color: #4a9b6f;">02 &nbsp;&middot;&nbsp; Per chi vende</p>
+                        <p style="font-size: 0.58rem; color: rgba(107,121,112,0.6); margin-top: 4px;">label su sfondo chiaro</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ 05 — MONOGRAMMA ══════════ -->
+    <div class="sec">
+        <p class="sec-label">05 &nbsp;&middot;&nbsp; Monogramma</p>
+
+        <p style="font-size: 0.8rem; color: var(--muted); line-height: 1.65; max-width: 500px; margin-bottom: 32px;">
+            Il monogramma è usato per favicon, avatar social, app icon e tutti i contesti
+            in cui il word mark completo non è leggibile. La lettera "R" di Cormorant Garamond
+            SemiBold in un contenitore quadrato o circolare.
+        </p>
+
+        <div style="display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap;">
+
+            <div class="mono-wrap">
+                <div class="mono-box" style="width: 48px; height: 48px; background: #2d6644; border-radius: 3px;">
+                    <span class="logotype" style="font-size: 1.6rem; color: var(--warm);">R</span>
+                </div>
+                <p style="font-size: 0.58rem; color: var(--muted);">48px — Verde</p>
+            </div>
+
+            <div class="mono-wrap">
+                <div class="mono-box" style="width: 64px; height: 64px; background: #2d6644; border-radius: 4px;">
+                    <span class="logotype" style="font-size: 2.1rem; color: var(--warm);">R</span>
+                </div>
+                <p style="font-size: 0.58rem; color: var(--muted);">64px — Verde</p>
+            </div>
+
+            <div class="mono-wrap">
+                <div class="mono-box" style="width: 64px; height: 64px; background: #0c1a11; border-radius: 4px;">
+                    <span class="logotype" style="font-size: 2.1rem; color: var(--warm);">R</span>
+                </div>
+                <p style="font-size: 0.58rem; color: var(--muted);">64px — Foresta</p>
+            </div>
+
+            <div class="mono-wrap">
+                <div class="mono-box" style="width: 64px; height: 64px; background: #f5f0e8; border-radius: 4px; border: 1px solid rgba(26,26,22,0.06);">
+                    <span class="logotype" style="font-size: 2.1rem; color: var(--ink);">R</span>
+                </div>
+                <p style="font-size: 0.58rem; color: var(--muted);">64px — Crema</p>
+            </div>
+
+            <div class="mono-wrap">
+                <div class="mono-box" style="width: 64px; height: 64px; background: #2d6644; border-radius: 50%;">
+                    <span class="logotype" style="font-size: 2.1rem; color: var(--warm);">R</span>
+                </div>
+                <p style="font-size: 0.58rem; color: var(--muted);">Avatar — Cerchio</p>
+            </div>
+
+            <div class="mono-wrap" style="margin-left: 12px;">
+                <div class="mono-box" style="width: 128px; height: 128px; background: #2d6644; border-radius: 20px;">
+                    <span class="logotype" style="font-size: 4.2rem; color: var(--warm);">R</span>
+                </div>
+                <p style="font-size: 0.58rem; color: var(--muted);">App icon — 128px</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ 06 — REGOLE D'USO ══════════ -->
+    <div class="sec">
+        <p class="sec-label">06 &nbsp;&middot;&nbsp; Regole d'uso</p>
+
+        <div class="do-dont-grid">
+
+            <div class="rule-card rule-ok">
+                <p class="rule-tag">Da fare</p>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li class="rule-text" style="display: flex; gap: 8px; align-items: flex-start;">
+                        <span style="color: var(--green); font-weight: 600; flex-shrink: 0;">+</span>
+                        Usare il logotipo sempre in Cormorant Garamond SemiBold
+                    </li>
+                    <li class="rule-text" style="display: flex; gap: 8px; align-items: flex-start;">
+                        <span style="color: var(--green); font-weight: 600; flex-shrink: 0;">+</span>
+                        Rispettare le combinazioni testo/sfondo approvate
+                    </li>
+                    <li class="rule-text" style="display: flex; gap: 8px; align-items: flex-start;">
+                        <span style="color: var(--green); font-weight: 600; flex-shrink: 0;">+</span>
+                        Mantenere il tracking a 0.18em nel word mark
+                    </li>
+                    <li class="rule-text" style="display: flex; gap: 8px; align-items: flex-start;">
+                        <span style="color: var(--green); font-weight: 600; flex-shrink: 0;">+</span>
+                        Garantire area di rispetto di almeno 1x altezza logo
+                    </li>
+                </ul>
+            </div>
+
+            <div class="rule-card rule-no">
+                <p class="rule-tag">Da evitare</p>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li class="rule-text" style="display: flex; gap: 8px; align-items: flex-start;">
+                        <span style="color: rgba(180,50,50,0.6); font-weight: 600; flex-shrink: 0;">-</span>
+                        Modificare i colori del logotipo al di fuori delle varianti approvate
+                    </li>
+                    <li class="rule-text" style="display: flex; gap: 8px; align-items: flex-start;">
+                        <span style="color: rgba(180,50,50,0.6); font-weight: 600; flex-shrink: 0;">-</span>
+                        Deformare, ruotare o aggiungere effetti (ombra, glow, outline)
+                    </li>
+                    <li class="rule-text" style="display: flex; gap: 8px; align-items: flex-start;">
+                        <span style="color: rgba(180,50,50,0.6); font-weight: 600; flex-shrink: 0;">-</span>
+                        Usare il logo su sfondi a basso contrasto o fotografici
+                    </li>
+                    <li class="rule-text" style="display: flex; gap: 8px; align-items: flex-start;">
+                        <span style="color: rgba(180,50,50,0.6); font-weight: 600; flex-shrink: 0;">-</span>
+                        Sostituire i font con altri caratteri non approvati
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ FOOTER DOCUMENTO ══════════ -->
+    <div style="padding: 28px 64px; display: flex; justify-content: space-between; align-items: center; background: var(--forest);">
+        <span class="logotype" style="font-size: 0.85rem; color: rgba(250,248,244,0.4);">Reviva</span>
+        <p style="font-size: 0.58rem; color: rgba(250,248,244,0.18); letter-spacing: 0.08em;">
+            Brand Identity v1.0 &nbsp;&middot;&nbsp; Uso interno &nbsp;&middot;&nbsp; Giugno 2026
+        </p>
+    </div>
+
+</div>
+</body>
+</html>
